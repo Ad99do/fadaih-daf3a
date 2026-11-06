@@ -1,591 +1,324 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>يلا نشوف الفضايح 🤣</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <style>
-        :root {
-            --bg-dark: #12081d;
-            --purple-header: #2e1847;
-            --purple-card: #1a0b2e;
-            --purple-btn: #6b21a8;
-            --text-main: #ffffff;
-            --text-sub: #b3a1c9;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            min-height: 100vh;
-            color: var(--text-main);
-            padding-bottom: 40px;
-        }
-
-        .hero-header {
-            background: linear-gradient(180deg, #2a1145 0%, #1a0b2e 100%);
-            color: white;
-            padding: 25px 20px 45px 20px;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            text-align: center;
-            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
-        }
-
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .badge-pill {
-            background: rgba(107, 33, 168, 0.4);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: #e9d5ff;
-        }
-
-        .admin-lock {
-            cursor: pointer;
-            font-size: 1.1rem;
-            color: #a855f7;
-            opacity: 0.8;
-        }
-
-        .hero-title {
-            font-size: 2.2rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #e9d5ff, #f472b6, #fef08a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 0.9rem;
-            color: var(--text-sub);
-            margin-bottom: 10px;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: -30px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: #ffffff;
-            border-radius: 18px;
-            padding: 12px 5px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-
-        .stat-num {
-            font-size: 1.4rem;
-            font-weight: 900;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: #64748b;
-            font-weight: bold;
-            margin-top: 3px;
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-            background: rgba(30, 15, 48, 0.8);
-            padding: 6px;
-            border-radius: 16px;
-            border: 1px solid rgba(168, 85, 247, 0.2);
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 12px 5px;
-            border: none;
-            background: transparent;
-            color: #c084fc;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(90deg, #7e22ce, #db2777);
-            color: white;
-            box-shadow: 0 4px 15px rgba(219, 39, 119, 0.4);
-        }
-
-        .search-box {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 14px 18px;
-            border-radius: 14px;
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            background: #1b0c2e;
-            color: white;
-            font-size: 0.95rem;
-            outline: none;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 0 5px;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #e9d5ff;
-        }
-
-        .section-hint {
-            font-size: 0.75rem;
-            color: var(--text-sub);
-            background: rgba(46, 24, 71, 0.6);
-            padding: 4px 10px;
-            border-radius: 8px;
-        }
-
-        .person-card {
-            background: var(--purple-card);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .person-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .person-name {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #ffffff;
-        }
-
-        .person-rank {
-            font-size: 0.75rem;
-            color: #c084fc;
-            background: rgba(107, 33, 168, 0.4);
-            padding: 3px 10px;
-            border-radius: 10px;
-        }
-
-        .options-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 8px;
-        }
-
-        .option-item {
-            background: #24103c;
-            border: 1px solid rgba(168, 85, 247, 0.15);
-            border-radius: 12px;
-            padding: 10px 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .option-progress {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(270deg, rgba(168, 85, 247, 0.3), rgba(236, 72, 153, 0.2));
-            z-index: 1;
-            transition: width 0.4s ease;
-        }
-
-        .option-label {
-            position: relative;
-            z-index: 2;
-            font-size: 0.88rem;
-            font-weight: 500;
-            color: #f3e8ff;
-        }
-
-        .option-val {
-            position: relative;
-            z-index: 2;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #f472b6;
-        }
-
-        .lb-card {
-            background: var(--purple-card);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            border-radius: 14px;
-            padding: 12px 16px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .admin-panel {
-            display: none;
-            background: #180929;
-            padding: 20px;
-            border-radius: 18px;
-            margin-top: 20px;
-            border: 1px solid #ef4444;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 8px;
-            text-align: right;
-            font-size: 0.85rem;
-        }
-
-        th { background: #2e1847; color: #f472b6; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>يلا نشوف الفضايح 🤣</title>
+<style>
+:root{--bg:#12081d;--card:#1a0b2e;--sub:#b3a1c9}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+body{background:var(--bg);min-height:100vh;color:#fff;padding-bottom:40px}
+.hero{background:linear-gradient(180deg,#2a1145,#1a0b2e);padding:25px 20px 45px;border-radius:0 0 30px 30px;text-align:center;border-bottom:1px solid rgba(168,85,247,.2)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.pill{background:rgba(107,33,168,.4);border:1px solid rgba(168,85,247,.3);padding:6px 16px;border-radius:20px;font-size:.85rem;color:#e9d5ff}
+#lock{cursor:pointer;font-size:1.3rem;padding:4px 8px}
+.title{font-size:2.2rem;font-weight:900;margin-bottom:10px;background:linear-gradient(90deg,#e9d5ff,#f472b6,#fef08a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{font-size:.9rem;color:var(--sub)}
+.container{max-width:500px;margin:0 auto;padding:0 15px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:-30px 0 20px}
+.stat{background:#fff;border-radius:18px;padding:12px 5px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.stat b{display:block;font-size:1.4rem;font-weight:900}
+.stat span{font-size:.75rem;color:#64748b;font-weight:bold}
+.tabs{display:flex;gap:8px;margin-bottom:15px;background:rgba(30,15,48,.8);padding:6px;border-radius:16px;border:1px solid rgba(168,85,247,.2)}
+.tab{flex:1;padding:12px 5px;border:none;background:transparent;color:#c084fc;border-radius:12px;font-weight:bold;font-size:.9rem;cursor:pointer}
+.tab.active{background:linear-gradient(90deg,#7e22ce,#db2777);color:#fff;box-shadow:0 4px 15px rgba(219,39,119,.4)}
+#search{width:100%;padding:14px 18px;border-radius:14px;border:1px solid rgba(168,85,247,.3);background:#1b0c2e;color:#fff;font-size:.95rem;outline:none;margin-bottom:20px}
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding:0 5px;gap:8px}
+.sec-title{font-size:1.1rem;font-weight:bold;color:#e9d5ff}
+.hint{font-size:.72rem;color:var(--sub);background:rgba(46,24,71,.6);padding:4px 10px;border-radius:8px}
+.person{background:var(--card);border:1px solid rgba(168,85,247,.2);border-radius:18px;padding:16px;margin-bottom:15px;box-shadow:0 4px 15px rgba(0,0,0,.2)}
+.p-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.05)}
+.p-name{font-size:1.1rem;font-weight:bold}
+.p-rank{font-size:.75rem;color:#c084fc;background:rgba(107,33,168,.4);padding:3px 10px;border-radius:10px}
+.opts{display:grid;gap:8px}
+.opt{background:#24103c;border:1px solid rgba(168,85,247,.15);border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;position:relative;overflow:hidden;user-select:none}
+.opt.voted{border-color:#f472b6}
+.bar{position:absolute;top:0;right:0;bottom:0;background:linear-gradient(270deg,rgba(168,85,247,.3),rgba(236,72,153,.2));transition:width .4s}
+.opt .l,.opt .v{position:relative;z-index:2}
+.l{font-size:.88rem;color:#f3e8ff}
+.v{font-size:.85rem;font-weight:bold;color:#f472b6}
+.lb{background:var(--card);border:1px solid rgba(168,85,247,.2);border-radius:14px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.empty{text-align:center;color:var(--sub);padding:20px}
+#admin{display:none;background:#180929;padding:20px;border-radius:18px;margin-top:20px;border:1px solid #ef4444}
+#admin button{background:#dc3545;color:#fff;border:none;padding:8px 12px;border-radius:8px;margin:10px 0;cursor:pointer;font-weight:bold}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{border:1px solid rgba(255,255,255,.1);padding:8px;text-align:right;font-size:.85rem}
+th{background:#2e1847;color:#f472b6}
+#toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#6b21a8;color:#fff;padding:10px 18px;border-radius:12px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .3s;z-index:50}
+#toast.show{opacity:1}
+</style>
 </head>
 <body>
-
-<div class="hero-header">
-    <div class="top-bar">
-        <span class="badge-pill">دفعتنا تحت المجهر 🔍</span>
-        <div style="display:flex; gap:10px; align-items:center;">
-            <span>♦️ 🤣</span>
-            <i class="fas fa-lock admin-lock" id="adminLockIcon"></i>
-        </div>
-    </div>
-    <h1 class="hero-title">يلا نشوف الفضايح 🤣</h1>
-    <p class="hero-subtitle">اختار التصنيف وشوف النسبة المئوية فوراً.. وتقدر تصوّت لأكثر من صفة!</p>
+<div class="hero">
+  <div class="top">
+    <span class="pill">دفعتنا تحت المجهر 🔍</span>
+    <div><span>♦️ 🤣</span> <span id="lock">🔒</span></div>
+  </div>
+  <h1 class="title">يلا نشوف الفضايح 🤣</h1>
+  <p class="subtitle">اختار التصنيف وشوف النسبة المئوية فوراً.. وتقدر تصوّت لأكثر من صفة!</p>
 </div>
 
 <div class="container">
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-num" style="color:#581c87" id="totalVotesCount">0</div>
-            <div class="stat-label">تصويت مسجل</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-num" style="color:#db2777" id="girlsCount">24</div>
-            <div class="stat-label">طالبة 👩</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-num" style="color:#4f46e5" id="boysCount">29</div>
-            <div class="stat-label">طالب 👦</div>
-        </div>
-    </div>
+  <div class="stats">
+    <div class="stat"><b id="totalVotes" style="color:#581c87">0</b><span>تصويت مسجل</span></div>
+    <div class="stat"><b id="girlsCount" style="color:#db2777">0</b><span>طالبة 👩</span></div>
+    <div class="stat"><b id="boysCount" style="color:#4f46e5">0</b><span>طالب 👦</span></div>
+  </div>
 
-    <div class="nav-tabs">
-        <button id="tab-girls" class="tab-btn active" onclick="switchTab('girls')">👩 البنات</button>
-        <button id="tab-boys" class="tab-btn" onclick="switchTab('boys')">👦 الأولاد</button>
-        <button id="tab-leaderboard" class="tab-btn" onclick="switchTab('leaderboard')">🏆 المتصدرون</button>
-    </div>
+  <div class="tabs">
+    <button class="tab active" data-tab="girls">👩 البنات</button>
+    <button class="tab" data-tab="boys">👦 الأولاد</button>
+    <button class="tab" data-tab="lb">🏆 المتصدرون</button>
+  </div>
 
-    <div class="search-box">
-        <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن اسم بالدفعة..." onkeyup="filterNames()">
-    </div>
+  <input id="search" type="text" placeholder="ابحث عن اسم بالدفعة...">
 
-    <div id="sectionTitleHeader" class="section-header">
-        <span class="section-title" id="sectionTitleText">✨ قائمة الطالبات</span>
-        <span class="section-hint">اضغط على أي صفة لتأكيد تصويتك</span>
-    </div>
+  <div class="sec-head">
+    <span class="sec-title" id="secTitle">✨ قائمة الطالبات</span>
+    <span class="hint">اضغط على أي صفة لتأكيد تصويتك</span>
+  </div>
 
-    <div id="girlsSection"></div>
-    <div id="boysSection" style="display:none;"></div>
-    <div id="leaderboardSection" style="display:none;">
-        <div id="leaderboardContent"></div>
-    </div>
+  <div id="girls"></div>
+  <div id="boys" style="display:none"></div>
+  <div id="lb" style="display:none"></div>
 
-    <!-- Admin Panel -->
-    <div id="adminSection" class="admin-panel">
-        <h2 style="color:#f87171;">🔒 لوحة التحكم السرية للأدمن</h2>
-        <button onclick="resetAllData()" style="background:#dc3545; color:white; border:none; padding:8px 12px; border-radius:8px; margin: 10px 0; cursor:pointer; font-weight:bold;">تصفير جميع الأصوات ⚠️</button>
-        <table id="votesTable">
-            <thead>
-                <tr>
-                    <th>المُصوَّت عليه</th>
-                    <th>الصفة المختارة</th>
-                    <th>وقت التصويت</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
+  <div id="admin">
+    <h2 style="color:#f87171">🔒 لوحة التحكم السرية للأدمن</h2>
+    <button id="resetBtn">تصفير جميع الأصوات ⚠️</button>
+    <table>
+      <thead><tr><th>المُصوَّت عليه</th><th>الصفة المختارة</th><th>الوقت</th></tr></thead>
+      <tbody id="logBody"></tbody>
+    </table>
+  </div>
 </div>
+<div id="toast"></div>
 
 <script>
-    const SUPABASE_URL = "https://kstnagfousuiwbnikkwi.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_7xQHPTjLP82fhRQjVY1vfw_nHGBbKKt";
-    let _supabase = null;
+(function(){
+const SB_URL = "https://kstnagfousuiwbnikkwi.supabase.co";
+const SB_KEY = "sb_publishable_7xQHPTjLP82fhRQjVY1vfw_nHGBbKKt";
+const ADMIN_PASS = "9014994";
 
-    const boysOptions = [
-        "1/ الحفار الخسيس 🎓", "2/ بتاع الونسه 🫥", "3/ الخسيس 😐", 
-        "4/ نجم الدفعة ♦️", "5/ اجتماعي ❤️", "6/ مبتعد عن الدفعة 😬", 
-        "7/ ملك التصرف الساي 🤣", "8/ المهذب ❣️", "9/ الطقه والقهوة 🥴", 
-        "10/ الموهوم 😶", "11/ البساعد الناس 🤍", "12/ صاحب الضحكه المميزه 🤣🌝", 
-        "13/ الخفيف الرشيق ⚡"
-    ];
-    
-    const girlsOptions = [
-        "1/ إجتماعيه ✨", "2/ الحفارة 🎓", "3/ السواطة 🤣", 
-        "4/ القطيعه 🤣", "5/ المهذبه ❣️", "6/ البعيده عن الدفعه 😐", 
-        "7/ نجمة الدفعة ♦️", "8/ العايشه الدور 🤣", "9/ الخسيسه 😶", 
-        "10/ أم لساان طويل 👅", "11/ البتنوم في المحاضره 😴", "12/ الخفيفه الرشيقه ⚡"
-    ];
+const boysOptions = ["1/ الحفار الخسيس 🎓","2/ بتاع الونسه 🫥","3/ الخسيس 😐","4/ نجم الدفعة ♦️","5/ اجتماعي ❤️","6/ مبتعد عن الدفعة 😬","7/ ملك التصرف الساي 🤣","8/ المهذب ❣️","9/ الطقه والقهوة 🥴","10/ الموهوم 😶","11/ البساعد الناس 🤍","12/ صاحب الضحكه المميزه 🤣🌝","13/ الخفيف الرشيق ⚡"];
+const girlsOptions = ["1/ إجتماعيه ✨","2/ الحفارة 🎓","3/ السواطة 🤣","4/ القطيعه 🤣","5/ المهذبه ❣️","6/ البعيده عن الدفعه 😐","7/ نجمة الدفعة ♦️","8/ العايشه الدور 🤣","9/ الخسيسه 😶","10/ أم لساان طويل 👅","11/ البتنوم في المحاضره 😴","12/ الخفيفه الرشيقه ⚡"];
+const boysList = ["منذر","ايمن","مجتبى سليمان","ماهر خالد","محمد عثمان جاد الله","محمد حسن","احمد البشير","احمد سامي","حسام المكنه","محمد عاطف","اواب","محمد خالد","الجيلى","التجاني","المثنى مزمل","عبدالله","نزار","أمجد","عبدالرحيم","محمد خوجلي","عبدالرحمن رضوان","المقداد صلاح","محمد","ادم تصرف ساي","وائل","مبارك خليل","عبدالله عبد الله","الطيب كمال الطيب","عاصم"];
+const girlsList = ["وعد أمين","مأب","نفيسه","رغده","مروه","شهد","قمر","رهام","ساجده","سبأ","ريان","ترتيل","دعاء","دلال","دعاء 2","سارة","امنية","زينب","ابرار","ضحى","مأب التانيه","شهد محمد","وعد عامر","عناب"];
 
-    const boysList = ["منذر", "ايمن", "مجتبى سليمان", "ماهر خالد", "محمد عثمان جاد الله", "محمد حسن", "احمد البشير", "احمد سامي", "حسام المكنه", "محمد عاطف", "اواب", "محمد خالد", "الجيلى", "التجاني", "المثنى مزمل", "عبدالله", "نزار", "أمجد", "عبدالرحيم", "محمد خوجلي", "عبدالرحمن رضوان", "المقداد صلاح", "محمد", "ادم تصرف ساي", "وائل", "مبارك خليل", "عبدالله عبد الله", "الطيب كمال الطيب", "عاصم"];
-    const girlsList = ["وعد أمين", "مأب", "نفيسه", "رغده", "مروه", "شهد", "قمر", "رهام", "ساجده", "سبأ", "ريان", "ترتيل", "دعاء", "دلال", "دعاء 2", "سارة", "امنية", "زينب", "ابرار", "ضحى", "مأب التانيه", "شهد محمد", "وعد عامر", "عناب"];
+const groups = {
+  girls: {list: girlsList, options: girlsOptions},
+  boys:  {list: boysList,  options: boysOptions}
+};
 
-    let votesData = {};
-    let logsData = [];
+let votes = {};
+let logs = [];
+let myVotes = new Set();
+let online = true;
 
-    function renderList(list, options, containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        container.innerHTML = '';
+try { myVotes = new Set(JSON.parse(localStorage.getItem('myVotes') || '[]')); } catch(e){}
+function saveMine(){ try { localStorage.setItem('myVotes', JSON.stringify([...myVotes])); } catch(e){} }
 
-        list.forEach((name) => {
-            let totalPersonVotes = 0;
-            options.forEach(opt => {
-                const key = `${name}_${opt}`;
-                totalPersonVotes += (votesData[key] || 0);
-            });
+const $ = id => document.getElementById(id);
+const clean = s => s.replace(/^\d+\//, '').trim();
+const keyOf = (name, opt) => name + '_' + opt;
 
-            const card = document.createElement('div');
-            card.className = "person-card";
-            card.setAttribute('data-name', name);
+function toast(msg){
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toast._t); toast._t = setTimeout(()=>t.classList.remove('show'), 2200);
+}
 
-            let optionsHTML = '';
-            options.forEach(opt => {
-                const key = `${name}_${opt}`;
-                const count = votesData[key] || 0;
-                const percent = totalPersonVotes > 0 ? Math.round((count / totalPersonVotes) * 100) : 0;
-                const cleanOpt = opt.replace(/^\d+\//, '').trim();
+async function sb(path, opts){
+  opts = opts || {};
+  const res = await fetch(SB_URL + '/rest/v1/' + path, {
+    method: opts.method || 'GET',
+    headers: Object.assign({
+      'apikey': SB_KEY,
+      'Content-Type': 'application/json'
+    }, opts.headers || {}),
+    body: opts.body ? JSON.stringify(opts.body) : undefined
+  });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const txt = await res.text();
+  return txt ? JSON.parse(txt) : null;
+}
 
-                optionsHTML += `
-                    <div class="option-item" onclick="castVote('${name}', '${opt}')">
-                        <div class="option-progress" style="width: ${percent}%"></div>
-                        <span class="option-label">${cleanOpt}</span>
-                        <span class="option-val">${percent}% (${count})</span>
-                    </div>
-                `;
-            });
+async function loadVotes(){
+  try {
+    const data = await sb('votes?select=*');
+    const fresh = {};
+    (data || []).forEach(v => { fresh[v.vote_key] = v.count; });
+    online = true;
+    if (JSON.stringify(fresh) !== JSON.stringify(votes)) { votes = fresh; render(); }
+  } catch(e){ online = false; }
+}
 
-            card.innerHTML = `
-                <div class="person-header">
-                    <span class="person-name">${name}</span>
-                    <span class="person-rank">أصوات: ${totalPersonVotes}</span>
-                </div>
-                <div class="options-list">${optionsHTML}</div>
-            `;
-            container.appendChild(card);
-        });
-    }
+async function loadLogs(){
+  try {
+    logs = (await sb('logs?select=*&order=id.desc&limit=50')) || [];
+    renderLogs();
+  } catch(e){}
+}
 
-    function refreshUI() {
-        renderList(girlsList, girlsOptions, 'girlsSection');
-        renderList(boysList, boysOptions, 'boysSection');
-        renderLeaderboard();
-        renderAdminLogs();
-        calculateTotalVotes();
-    }
+function personCard(name, options, gid){
+  const counts = options.map(o => votes[keyOf(name,o)] || 0);
+  const total = counts.reduce((a,b)=>a+b,0);
 
-    function calculateTotalVotes() {
-        let sum = 0;
-        for (let k in votesData) sum += votesData[k];
-        const elem = document.getElementById('totalVotesCount');
-        if (elem) elem.innerText = sum;
-    }
+  const card = document.createElement('div');
+  card.className = 'person';
+  card.dataset.name = name;
 
-    function renderLeaderboard() {
-        const container = document.getElementById('leaderboardContent');
-        if (!container) return;
-        const items = [];
+  const head = document.createElement('div'); head.className = 'p-head';
+  const n = document.createElement('span'); n.className = 'p-name'; n.textContent = name;
+  const r = document.createElement('span'); r.className = 'p-rank'; r.textContent = 'أصوات: ' + total;
+  head.append(n, r);
 
-        for (let key in votesData) {
-            if (votesData[key] > 0) {
-                const parts = key.split('_');
-                if (parts.length >= 2) {
-                    items.push({
-                        name: parts[0],
-                        option: parts.slice(1).join('_').replace(/^\d+\//, '').trim(),
-                        count: votesData[key]
-                    });
-                }
-            }
-        }
+  const list = document.createElement('div'); list.className = 'opts';
+  options.forEach((opt, i) => {
+    const pct = total ? Math.round(counts[i] / total * 100) : 0;
+    const el = document.createElement('div');
+    el.className = 'opt' + (myVotes.has(keyOf(name,opt)) ? ' voted' : '');
+    el.dataset.g = gid; el.dataset.n = name; el.dataset.o = i;
+    const bar = document.createElement('div'); bar.className = 'bar'; bar.style.width = pct + '%';
+    const l = document.createElement('span'); l.className = 'l'; l.textContent = clean(opt);
+    const v = document.createElement('span'); v.className = 'v'; v.textContent = pct + '% (' + counts[i] + ')';
+    el.append(bar, l, v);
+    list.appendChild(el);
+  });
 
-        items.sort((a, b) => b.count - a.count);
+  card.append(head, list);
+  return card;
+}
 
-        if (items.length === 0) {
-            container.innerHTML = `<div class="person-card" style="text-align:center; color:var(--text-sub);">لا توجد أصوات مسجلة حتى الآن.</div>`;
-            return;
-        }
+function renderGroup(gid){
+  const box = $(gid), g = groups[gid];
+  box.textContent = '';
+  g.list.forEach(name => box.appendChild(personCard(name, g.options, gid)));
+}
 
-        let html = '';
-        items.forEach((item, rank) => {
-            let badge = rank === 0 ? '🥇' : rank === 1 ? '🥈' : rank === 2 ? '🥉' : `#${rank + 1}`;
-            html += `
-                <div class="lb-card">
-                    <div>
-                        <b style="color:white;">${badge} ${item.name}</b>
-                        <div style="font-size:0.8rem; color:#c084fc;">${item.option}</div>
-                    </div>
-                    <div style="color:#f472b6; font-weight:bold;">${item.count} أصوات</div>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
-    }
+function renderLeaderboard(){
+  const items = [];
+  Object.keys(groups).forEach(gid => {
+    const g = groups[gid];
+    g.list.forEach(name => g.options.forEach(opt => {
+      const c = votes[keyOf(name,opt)] || 0;
+      if (c > 0) items.push({name, option: clean(opt), count: c});
+    }));
+  });
+  items.sort((a,b)=>b.count-a.count);
 
-    async function castVote(name, option) {
-        const key = `${name}_${option}`;
-        const newCount = (votesData[key] || 0) + 1;
-        const timeStr = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+  const box = $('lb'); box.textContent = '';
+  if (!items.length){
+    const d = document.createElement('div'); d.className = 'person empty';
+    d.textContent = 'لا توجد أصوات مسجلة حتى الآن.'; box.appendChild(d); return;
+  }
+  items.slice(0, 50).forEach((it, i) => {
+    const badge = i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1);
+    const row = document.createElement('div'); row.className = 'lb';
+    const left = document.createElement('div');
+    const b = document.createElement('b'); b.textContent = badge + ' ' + it.name;
+    const s = document.createElement('div'); s.style.cssText = 'font-size:.8rem;color:#c084fc'; s.textContent = it.option;
+    left.append(b, s);
+    const right = document.createElement('div'); right.style.cssText = 'color:#f472b6;font-weight:bold';
+    right.textContent = it.count + ' أصوات';
+    row.append(left, right);
+    box.appendChild(row);
+  });
+}
 
-        votesData[key] = newCount;
-        logsData.unshift({ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr });
-        refreshUI();
-
-        if (_supabase) {
-            try {
-                await _supabase.from('votes').upsert({ vote_key: key, count: newCount });
-                await _supabase.from('logs').insert([{ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr }]);
-            } catch(e){}
-        }
-    }
-
-    function switchTab(tabName) {
-        document.getElementById('tab-girls').classList.remove('active');
-        document.getElementById('tab-boys').classList.remove('active');
-        document.getElementById('tab-leaderboard').classList.remove('active');
-
-        document.getElementById('girlsSection').style.display = 'none';
-        document.getElementById('boysSection').style.display = 'none';
-        document.getElementById('leaderboardSection').style.display = 'none';
-
-        if (tabName === 'girls') {
-            document.getElementById('tab-girls').classList.add('active');
-            document.getElementById('girlsSection').style.display = 'block';
-            document.getElementById('sectionTitleText').innerText = "✨ قائمة الطالبات";
-        } else if (tabName === 'boys') {
-            document.getElementById('tab-boys').classList.add('active');
-            document.getElementById('boysSection').style.display = 'block';
-            document.getElementById('sectionTitleText').innerText = "⚡ قائمة الطلاب";
-        } else if (tabName === 'leaderboard') {
-            document.getElementById('tab-leaderboard').classList.add('active');
-            document.getElementById('leaderboardSection').style.display = 'block';
-            document.getElementById('sectionTitleText').innerText = "🏆 المتصدرون في التصويت";
-        }
-    }
-
-    function filterNames() {
-        const query = document.getElementById('searchInput').value.toLowerCase().trim();
-        document.querySelectorAll('.person-card').forEach(card => {
-            const name = card.getAttribute('data-name').toLowerCase();
-            card.style.display = name.includes(query) ? 'block' : 'none';
-        });
-    }
-
-    let clickCount = 0;
-    document.getElementById('adminLockIcon').addEventListener('click', () => {
-        clickCount++;
-        if (clickCount === 3) {
-            const pass = prompt("أدخل كلمة سر الأدمن:");
-            if (pass === "9014994") {
-                document.getElementById('adminSection').style.display = 'block';
-            }
-            clickCount = 0;
-        }
-        setTimeout(() => { clickCount = 0; }, 1500);
+function renderLogs(){
+  const tb = $('logBody'); tb.textContent = '';
+  logs.slice(0, 50).forEach(l => {
+    const tr = document.createElement('tr');
+    [l.name, l.option, l.time].forEach(t => {
+      const td = document.createElement('td'); td.textContent = t == null ? '' : t; tr.appendChild(td);
     });
+    tb.appendChild(tr);
+  });
+}
 
-    function renderAdminLogs() {
-        const tbody = document.querySelector('#votesTable tbody');
-        if (!tbody) return;
-        tbody.innerHTML = '';
-        logsData.slice(0, 50).forEach(log => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${log.name}</td><td>${log.option}</td><td>${log.time}</td>`;
-            tbody.appendChild(tr);
-        });
-    }
+function render(){
+  renderGroup('girls'); renderGroup('boys'); renderLeaderboard();
+  let sum = 0; for (const k in votes) sum += votes[k] || 0;
+  $('totalVotes').textContent = sum;
+  filterNames();
+}
 
-    async function resetAllData() {
-        if (confirm("هل أنت تأكد من مسح جميع الأصوات؟")) {
-            if (_supabase) {
-                try {
-                    await _supabase.from('votes').delete().neq('count', -1);
-                    await _supabase.from('logs').delete().neq('id', -1);
-                } catch(e){}
-            }
-            votesData = {}; logsData = [];
-            refreshUI();
-        }
-    }
+async function castVote(gid, name, optIndex){
+  const opt = groups[gid].options[optIndex];
+  const key = keyOf(name, opt);
+  if (myVotes.has(key)){ toast('صوّتّ لهذه الصفة من قبل ✋'); return; }
 
-    // 🚀 التنفيذ الفوري المستقل
-    document.getElementById('boysCount').innerText = boysList.length;
-    document.getElementById('girlsCount').innerText = girlsList.length;
-    
-    // رسم البطاقات فوراً قبل الاتصال بالشبكة
-    refreshUI();
+  votes[key] = (votes[key] || 0) + 1;
+  myVotes.add(key); saveMine(); render();
+  toast('تم تسجيل صوتك ✅');
 
-    // تشغيل الاتصال بالسيرفر في الخلفية
-    window.onload = function() {
-        try {
-            if (window.supabase) {
-                _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-     
+  try {
+    const cur = await sb('votes?select=count&vote_key=eq.' + encodeURIComponent(key));
+    const latest = (cur && cur[0] ? cur[0].count : 0) + 1;
+    await sb('votes?on_conflict=vote_key', {
+      method: 'POST',
+      headers: {'Prefer': 'resolution=merge-duplicates,return=minimal'},
+      body: {vote_key: key, count: latest}
+    });
+    votes[key] = latest; render();
+    const time = new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
+    await sb('logs', {method:'POST', headers:{'Prefer':'return=minimal'}, body:{name, option: clean(opt), time}});
+  } catch(e){
+    votes[key] = Math.max(0, (votes[key] || 1) - 1);
+    myVotes.delete(key); saveMine(); render();
+    toast('ما انحفظ الصوت، جرّب مرة ثانية ⚠️');
+  }
+}
+
+['girls','boys'].forEach(gid => {
+  $(gid).addEventListener('click', e => {
+    const el = e.target.closest('.opt'); if (!el) return;
+    castVote(el.dataset.g, el.dataset.n, +el.dataset.o);
+  });
+});
+
+const titles = {girls:'✨ قائمة الطالبات', boys:'⚡ قائمة الطلاب', lb:'🏆 المتصدرون في التصويت'};
+function switchTab(t){
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === t));
+  ['girls','boys','lb'].forEach(id => $(id).style.display = id === t ? 'block' : 'none');
+  $('secTitle').textContent = titles[t];
+  $('search').style.display = t === 'lb' ? 'none' : 'block';
+}
+document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
+
+function filterNames(){
+  const q = $('search').value.toLowerCase().trim();
+  document.querySelectorAll('.person[data-name]').forEach(c => {
+    c.style.display = c.dataset.name.toLowerCase().includes(q) ? 'block' : 'none';
+  });
+}
+$('search').addEventListener('input', filterNames);
+
+let taps = 0, tapTimer;
+$('lock').addEventListener('click', () => {
+  taps++; clearTimeout(tapTimer); tapTimer = setTimeout(()=>taps=0, 1500);
+  if (taps >= 3){
+    taps = 0;
+    const p = prompt('أدخل كلمة سر الأدمن:');
+    if (p === ADMIN_PASS){ $('admin').style.display = 'block'; loadLogs(); $('admin').scrollIntoView({behavior:'smooth'}); }
+  }
+});
+
+$('resetBtn').addEventListener('click', async () => {
+  if (!confirm('هل أنت متأكد من مسح جميع الأصوات؟')) return;
+  try {
+    await sb('votes?count=gte.0', {method:'DELETE'});
+    await sb('logs?id=gte.0', {method:'DELETE'});
+    votes = {}; logs = []; myVotes = new Set(); saveMine(); render(); renderLogs();
+    toast('تم التصفير ✅');
+  } catch(e){ toast('فشل التصفير، تأكد من سياسة DELETE في Supabase ⚠️'); }
+});
+
+$('girlsCount').textContent = girlsList.length;
+$('boysCount').textContent = boysList.length;
+render();
+loadVotes();
+setInterval(loadVotes, 4000);
+})();
+</script>
+</body>
+</html>
