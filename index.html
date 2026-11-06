@@ -148,7 +148,6 @@
         refreshUI();
     }
 
-    // تفعيل التحديث اللحظي المباشر بين جميع التلفونات
     _supabase.channel('public:votes')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'votes' }, payload => {
           if (payload.new) {
@@ -207,7 +206,6 @@
         votesData[key] = newCount;
         refreshUI();
 
-        // إرسال الصوت مباشرة لسيرفر Supabase
         await _supabase.from('votes').upsert({ vote_key: key, count: newCount });
         await _supabase.from('logs').insert([{ name: name, option: option, time: timeStr }]);
     }
