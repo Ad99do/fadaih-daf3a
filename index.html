@@ -2,322 +2,261 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>يلا نشوف الفضايح 🤣</title>
 <style>
-:root{--bg:#12081d;--card:#1a0b2e;--sub:#b3a1c9}
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
-body{background:var(--bg);min-height:100vh;color:#fff;padding-bottom:40px}
-.hero{background:linear-gradient(180deg,#2a1145,#1a0b2e);padding:25px 20px 45px;border-radius:0 0 30px 30px;text-align:center;border-bottom:1px solid rgba(168,85,247,.2)}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.pill{background:rgba(107,33,168,.4);border:1px solid rgba(168,85,247,.3);padding:6px 16px;border-radius:20px;font-size:.85rem;color:#e9d5ff}
-#lock{cursor:pointer;font-size:1.3rem;padding:4px 8px}
-.title{font-size:2.2rem;font-weight:900;margin-bottom:10px;background:linear-gradient(90deg,#e9d5ff,#f472b6,#fef08a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.subtitle{font-size:.9rem;color:var(--sub)}
-.container{max-width:500px;margin:0 auto;padding:0 15px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:-30px 0 20px}
-.stat{background:#fff;border-radius:18px;padding:12px 5px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.3)}
-.stat b{display:block;font-size:1.4rem;font-weight:900}
-.stat span{font-size:.75rem;color:#64748b;font-weight:bold}
-.tabs{display:flex;gap:8px;margin-bottom:15px;background:rgba(30,15,48,.8);padding:6px;border-radius:16px;border:1px solid rgba(168,85,247,.2)}
-.tab{flex:1;padding:12px 5px;border:none;background:transparent;color:#c084fc;border-radius:12px;font-weight:bold;font-size:.9rem;cursor:pointer}
-.tab.active{background:linear-gradient(90deg,#7e22ce,#db2777);color:#fff;box-shadow:0 4px 15px rgba(219,39,119,.4)}
-#search{width:100%;padding:14px 18px;border-radius:14px;border:1px solid rgba(168,85,247,.3);background:#1b0c2e;color:#fff;font-size:.95rem;outline:none;margin-bottom:20px}
-.sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding:0 5px;gap:8px}
-.sec-title{font-size:1.1rem;font-weight:bold;color:#e9d5ff}
-.hint{font-size:.72rem;color:var(--sub);background:rgba(46,24,71,.6);padding:4px 10px;border-radius:8px}
-.person{background:var(--card);border:1px solid rgba(168,85,247,.2);border-radius:18px;padding:16px;margin-bottom:15px;box-shadow:0 4px 15px rgba(0,0,0,.2)}
-.p-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.05)}
-.p-name{font-size:1.1rem;font-weight:bold}
-.p-rank{font-size:.75rem;color:#c084fc;background:rgba(107,33,168,.4);padding:3px 10px;border-radius:10px}
-.opts{display:grid;gap:8px}
-.opt{background:#24103c;border:1px solid rgba(168,85,247,.15);border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;position:relative;overflow:hidden;user-select:none}
-.opt.voted{border-color:#f472b6}
-.bar{position:absolute;top:0;right:0;bottom:0;background:linear-gradient(270deg,rgba(168,85,247,.3),rgba(236,72,153,.2));transition:width .4s}
-.opt .l,.opt .v{position:relative;z-index:2}
-.l{font-size:.88rem;color:#f3e8ff}
-.v{font-size:.85rem;font-weight:bold;color:#f472b6}
-.lb{background:var(--card);border:1px solid rgba(168,85,247,.2);border-radius:14px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
-.empty{text-align:center;color:var(--sub);padding:20px}
-#admin{display:none;background:#180929;padding:20px;border-radius:18px;margin-top:20px;border:1px solid #ef4444}
-#admin button{background:#dc3545;color:#fff;border:none;padding:8px 12px;border-radius:8px;margin:10px 0;cursor:pointer;font-weight:bold}
-table{width:100%;border-collapse:collapse;margin-top:15px}
-th,td{border:1px solid rgba(255,255,255,.1);padding:8px;text-align:right;font-size:.85rem}
-th{background:#2e1847;color:#f472b6}
-#toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#6b21a8;color:#fff;padding:10px 18px;border-radius:12px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .3s;z-index:50}
+:root{--bg:#0b1020;--panel:#141a33;--panel2:#1c2444;--line:rgba(255,255,255,.08);--txt:#f4f6ff;--sub:#98a2c9;--a:#7c5cff;--b:#ff5c9d;--gold:#ffc857}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--txt);min-height:100vh;padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+header{padding:calc(18px + env(safe-area-inset-top,0px)) 16px 22px;text-align:center;background:radial-gradient(120% 100% at 50% 0,#2b2170 0,var(--bg) 70%)}
+.row{display:flex;justify-content:space-between;align-items:center}
+.tag{font-size:.8rem;color:#d9d2ff;background:rgba(124,92,255,.22);border:1px solid rgba(124,92,255,.4);padding:5px 14px;border-radius:99px}
+#lock{font-size:1.3rem;padding:6px 10px;cursor:pointer}
+h1{font-size:2rem;font-weight:900;margin:16px 0 6px;background:linear-gradient(90deg,#fff,var(--b),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:.85rem;color:var(--sub)}
+.chips{display:flex;gap:8px;justify-content:center;margin-top:16px}
+.chip{flex:1;max-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:10px 4px}
+.chip b{display:block;font-size:1.3rem}
+.chip span{font-size:.72rem;color:var(--sub)}
+main{max-width:520px;margin:0 auto;padding:0 14px}
+#search{width:100%;padding:13px 16px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--txt);font-size:.95rem;outline:none;margin:6px 0 14px}
+#search:focus{border-color:var(--a)}
+.sec{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px}
+.sec h2{font-size:1.05rem}
+.hint{font-size:.72rem;color:var(--sub)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;margin-bottom:10px;overflow:hidden}
+.ch{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:1.1rem;background:linear-gradient(135deg,var(--a),var(--b));flex:none}
+.boys .av{background:linear-gradient(135deg,#3b82f6,var(--a))}
+.info{flex:1;min-width:0}
+.nm{font-weight:800;font-size:1.02rem}
+.top{font-size:.75rem;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top.none{color:var(--sub)}
+.cnt{font-size:.75rem;background:var(--panel2);color:var(--sub);padding:4px 10px;border-radius:99px}
+.arrow{color:var(--sub);transition:transform .2s}
+.card.open .arrow{transform:rotate(180deg)}
+.opts{display:none;padding:0 12px 12px;gap:7px;grid-template-columns:1fr}
+.card.open .opts{display:grid}
+.opt{position:relative;overflow:hidden;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:11px 13px;display:flex;justify-content:space-between;cursor:pointer;user-select:none}
+.opt.mine{border-color:var(--b)}
+.bar{position:absolute;inset:0 0 0 auto;background:linear-gradient(270deg,rgba(124,92,255,.45),rgba(255,92,157,.25));transition:width .4s}
+.opt span{position:relative;font-size:.88rem}
+.opt .v{font-weight:800;color:var(--b)}
+.lb{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:8px}
+.rk{font-size:1.2rem;min-width:34px;text-align:center}
+.lb .t{flex:1}
+.lb .t small{display:block;color:var(--sub);font-size:.8rem;margin-top:2px}
+.lb .n{font-weight:900;color:var(--gold)}
+.empty{text-align:center;color:var(--sub);padding:30px 10px}
+nav{position:fixed;bottom:0;inset-inline:0;display:flex;gap:6px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));background:rgba(11,16,32,.92);backdrop-filter:blur(10px);border-top:1px solid var(--line);z-index:20}
+.tab{flex:1;border:none;background:transparent;color:var(--sub);padding:10px 4px;border-radius:14px;font-weight:700;font-size:.85rem;cursor:pointer}
+.tab.on{background:linear-gradient(90deg,var(--a),var(--b));color:#fff}
+#admin{display:none;margin-top:20px;background:#1d0f1c;border:1px solid #ef4444;border-radius:16px;padding:16px}
+#admin button{background:#dc2626;color:#fff;border:none;padding:9px 14px;border-radius:10px;font-weight:800;margin:10px 0;cursor:pointer}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid var(--line);padding:7px;text-align:right;font-size:.82rem}
+th{background:var(--panel2);color:var(--b)}
+#toast{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--a);color:#fff;padding:10px 18px;border-radius:12px;font-size:.88rem;opacity:0;pointer-events:none;transition:opacity .3s;z-index:30}
 #toast.show{opacity:1}
 </style>
 </head>
 <body>
-<div class="hero">
-  <div class="top">
-    <span class="pill">دفعتنا تحت المجهر 🔍</span>
-    <div><span>♦️ 🤣</span> <span id="lock">🔒</span></div>
+<header>
+  <div class="row"><span class="tag">دفعتنا تحت المجهر 🔍</span><span><span>♦️ 🤣</span><span id="lock">🔒</span></span></div>
+  <h1>يلا نشوف الفضايح 🤣</h1>
+  <p class="sub">اختار التصنيف وشوف النسبة فوراً.. وتقدر تصوّت لأكثر من صفة!</p>
+  <div class="chips">
+    <div class="chip"><b id="sTotal">0</b><span>تصويت مسجل</span></div>
+    <div class="chip"><b id="sGirls">0</b><span>طالبة 👩</span></div>
+    <div class="chip"><b id="sBoys">0</b><span>طالب 👦</span></div>
   </div>
-  <h1 class="title">يلا نشوف الفضايح 🤣</h1>
-  <p class="subtitle">اختار التصنيف وشوف النسبة المئوية فوراً.. وتقدر تصوّت لأكثر من صفة!</p>
-</div>
+</header>
 
-<div class="container">
-  <div class="stats">
-    <div class="stat"><b id="totalVotes" style="color:#581c87">0</b><span>تصويت مسجل</span></div>
-    <div class="stat"><b id="girlsCount" style="color:#db2777">0</b><span>طالبة 👩</span></div>
-    <div class="stat"><b id="boysCount" style="color:#4f46e5">0</b><span>طالب 👦</span></div>
-  </div>
-
-  <div class="tabs">
-    <button class="tab active" data-tab="girls">👩 البنات</button>
-    <button class="tab" data-tab="boys">👦 الأولاد</button>
-    <button class="tab" data-tab="lb">🏆 المتصدرون</button>
-  </div>
-
-  <input id="search" type="text" placeholder="ابحث عن اسم بالدفعة...">
-
-  <div class="sec-head">
-    <span class="sec-title" id="secTitle">✨ قائمة الطالبات</span>
-    <span class="hint">اضغط على أي صفة لتأكيد تصويتك</span>
-  </div>
-
+<main>
+  <input id="search" type="search" placeholder="ابحث عن اسم بالدفعة...">
+  <div class="sec"><h2 id="secT">✨ قائمة الطالبات</h2><span class="hint" id="secH">اضغط على الاسم ثم اختر الصفة</span></div>
   <div id="girls"></div>
-  <div id="boys" style="display:none"></div>
-  <div id="lb" style="display:none"></div>
+  <div id="boys" class="boys" style="display:none"></div>
+  <div id="lbox" style="display:none"></div>
 
   <div id="admin">
-    <h2 style="color:#f87171">🔒 لوحة التحكم السرية للأدمن</h2>
-    <button id="resetBtn">تصفير جميع الأصوات ⚠️</button>
-    <table>
-      <thead><tr><th>المُصوَّت عليه</th><th>الصفة المختارة</th><th>الوقت</th></tr></thead>
-      <tbody id="logBody"></tbody>
-    </table>
+    <h3 style="color:#f87171">🔒 لوحة الأدمن</h3>
+    <button id="reset">تصفير جميع الأصوات ⚠️</button>
+    <div class="tw"><table><thead><tr><th>المُصوَّت عليه</th><th>الصفة</th><th>الوقت</th></tr></thead><tbody id="logs"></tbody></table></div>
   </div>
-</div>
+</main>
+
+<nav>
+  <button class="tab on" data-t="girls">👩 البنات</button>
+  <button class="tab" data-t="boys">👦 الأولاد</button>
+  <button class="tab" data-t="lbox">🏆 المتصدرون</button>
+</nav>
 <div id="toast"></div>
 
 <script>
 (function(){
-const SB_URL = "https://kstnagfousuiwbnikkwi.supabase.co";
-const SB_KEY = "sb_publishable_7xQHPTjLP82fhRQjVY1vfw_nHGBbKKt";
-const ADMIN_PASS = "9014994";
+const URL_ = "https://kstnagfousuiwbnikkwi.supabase.co";
+const KEY = "sb_publishable_7xQHPTjLP82fhRQjVY1vfw_nHGBbKKt";
+const PASS = "9014994";
 
-const boysOptions = ["1/ الحفار الخسيس 🎓","2/ بتاع الونسه 🫥","3/ الخسيس 😐","4/ نجم الدفعة ♦️","5/ اجتماعي ❤️","6/ مبتعد عن الدفعة 😬","7/ ملك التصرف الساي 🤣","8/ المهذب ❣️","9/ الطقه والقهوة 🥴","10/ الموهوم 😶","11/ البساعد الناس 🤍","12/ صاحب الضحكه المميزه 🤣🌝","13/ الخفيف الرشيق ⚡"];
-const girlsOptions = ["1/ إجتماعيه ✨","2/ الحفارة 🎓","3/ السواطة 🤣","4/ القطيعه 🤣","5/ المهذبه ❣️","6/ البعيده عن الدفعه 😐","7/ نجمة الدفعة ♦️","8/ العايشه الدور 🤣","9/ الخسيسه 😶","10/ أم لساان طويل 👅","11/ البتنوم في المحاضره 😴","12/ الخفيفه الرشيقه ⚡"];
-const boysList = ["منذر","ايمن","مجتبى سليمان","ماهر خالد","محمد عثمان جاد الله","محمد حسن","احمد البشير","احمد سامي","حسام المكنه","محمد عاطف","اواب","محمد خالد","الجيلى","التجاني","المثنى مزمل","عبدالله","نزار","أمجد","عبدالرحيم","محمد خوجلي","عبدالرحمن رضوان","المقداد صلاح","محمد","ادم تصرف ساي","وائل","مبارك خليل","عبدالله عبد الله","الطيب كمال الطيب","عاصم"];
-const girlsList = ["وعد أمين","مأب","نفيسه","رغده","مروه","شهد","قمر","رهام","ساجده","سبأ","ريان","ترتيل","دعاء","دلال","دعاء 2","سارة","امنية","زينب","ابرار","ضحى","مأب التانيه","شهد محمد","وعد عامر","عناب"];
-
-const groups = {
-  girls: {list: girlsList, options: girlsOptions},
-  boys:  {list: boysList,  options: boysOptions}
+const G = {
+  girls:{
+    list:["وعد أمين","مأب","نفيسه","رغده","مروه","شهد","قمر","رهام","ساجده","سبأ","ريان","ترتيل","دعاء","دلال","دعاء 2","سارة","امنية","زينب","ابرار","ضحى","مأب التانيه","شهد محمد","وعد عامر","عناب"],
+    opts:["1/ إجتماعيه ✨","2/ الحفارة 🎓","3/ السواطة 🤣","4/ القطيعه 🤣","5/ المهذبه ❣️","6/ البعيده عن الدفعه 😐","7/ نجمة الدفعة ♦️","8/ العايشه الدور 🤣","9/ الخسيسه 😶","10/ أم لساان طويل 👅","11/ البتنوم في المحاضره 😴","12/ الخفيفه الرشيقه ⚡"]
+  },
+  boys:{
+    list:["منذر","ايمن","مجتبى سليمان","ماهر خالد","محمد عثمان جاد الله","محمد حسن","احمد البشير","احمد سامي","حسام المكنه","محمد عاطف","اواب","محمد خالد","الجيلى","التجاني","المثنى مزمل","عبدالله","نزار","أمجد","عبدالرحيم","محمد خوجلي","عبدالرحمن رضوان","المقداد صلاح","محمد","ادم تصرف ساي","وائل","مبارك خليل","عبدالله عبد الله","الطيب كمال الطيب","عاصم"],
+    opts:["1/ الحفار الخسيس 🎓","2/ بتاع الونسه 🫥","3/ الخسيس 😐","4/ نجم الدفعة ♦️","5/ اجتماعي ❤️","6/ مبتعد عن الدفعة 😬","7/ ملك التصرف الساي 🤣","8/ المهذب ❣️","9/ الطقه والقهوة 🥴","10/ الموهوم 😶","11/ البساعد الناس 🤍","12/ صاحب الضحكه المميزه 🤣🌝","13/ الخفيف الرشيق ⚡"]
+  }
 };
 
-let votes = {};
-let logs = [];
-let myVotes = new Set();
-let online = true;
-
-try { myVotes = new Set(JSON.parse(localStorage.getItem('myVotes') || '[]')); } catch(e){}
-function saveMine(){ try { localStorage.setItem('myVotes', JSON.stringify([...myVotes])); } catch(e){} }
-
+let votes = {}, mine = new Set(), openKey = null, tab = 'girls';
+try { mine = new Set(JSON.parse(localStorage.getItem('mine2') || '[]')); } catch(e){}
+const save = () => { try { localStorage.setItem('mine2', JSON.stringify([...mine])); } catch(e){} };
 const $ = id => document.getElementById(id);
-const clean = s => s.replace(/^\d+\//, '').trim();
-const keyOf = (name, opt) => name + '_' + opt;
+const clean = s => s.replace(/^\d+\//,'').trim();
+const kk = (n,o) => n + '_' + o;
+const mk = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
 
-function toast(msg){
-  const t = $('toast'); t.textContent = msg; t.classList.add('show');
-  clearTimeout(toast._t); toast._t = setTimeout(()=>t.classList.remove('show'), 2200);
-}
+function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove('show'),2200); }
 
-async function sb(path, opts){
-  opts = opts || {};
-  const res = await fetch(SB_URL + '/rest/v1/' + path, {
-    method: opts.method || 'GET',
-    headers: Object.assign({
-      'apikey': SB_KEY,
-      'Content-Type': 'application/json'
-    }, opts.headers || {}),
-    body: opts.body ? JSON.stringify(opts.body) : undefined
+async function sb(path, o){
+  o = o || {};
+  const r = await fetch(URL_ + '/rest/v1/' + path, {
+    method: o.method || 'GET',
+    headers: Object.assign({apikey: KEY, 'Content-Type':'application/json'}, o.headers || {}),
+    body: o.body ? JSON.stringify(o.body) : undefined
   });
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  const txt = await res.text();
-  return txt ? JSON.parse(txt) : null;
+  if (!r.ok) throw new Error(r.status);
+  const t = await r.text(); return t ? JSON.parse(t) : null;
 }
 
-async function loadVotes(){
+async function pull(){
   try {
-    const data = await sb('votes?select=*');
-    const fresh = {};
-    (data || []).forEach(v => { fresh[v.vote_key] = v.count; });
-    online = true;
-    if (JSON.stringify(fresh) !== JSON.stringify(votes)) { votes = fresh; render(); }
-  } catch(e){ online = false; }
-}
-
-async function loadLogs(){
-  try {
-    logs = (await sb('logs?select=*&order=id.desc&limit=50')) || [];
-    renderLogs();
+    const d = await sb('votes?select=*'), f = {};
+    (d || []).forEach(v => f[v.vote_key] = v.count);
+    if (JSON.stringify(f) !== JSON.stringify(votes)){ votes = f; draw(); }
   } catch(e){}
 }
 
-function personCard(name, options, gid){
-  const counts = options.map(o => votes[keyOf(name,o)] || 0);
+function card(gid, name){
+  const g = G[gid], ck = gid + ':' + name;
+  const counts = g.opts.map(o => votes[kk(name,o)] || 0);
   const total = counts.reduce((a,b)=>a+b,0);
+  const mx = Math.max.apply(null, counts), ti = counts.indexOf(mx);
 
-  const card = document.createElement('div');
-  card.className = 'person';
-  card.dataset.name = name;
+  const c = mk('div', 'card' + (openKey === ck ? ' open' : ''));
+  c.dataset.name = name; c.dataset.ck = ck;
 
-  const head = document.createElement('div'); head.className = 'p-head';
-  const n = document.createElement('span'); n.className = 'p-name'; n.textContent = name;
-  const r = document.createElement('span'); r.className = 'p-rank'; r.textContent = 'أصوات: ' + total;
-  head.append(n, r);
+  const h = mk('div','ch');
+  const av = mk('div','av', name.trim().charAt(0));
+  const info = mk('div','info');
+  info.append(mk('div','nm',name), mk('div','top' + (mx ? '' : ' none'), mx ? '🔥 ' + clean(g.opts[ti]) + ' (' + mx + ')' : 'ما في أصوات بعد'));
+  h.append(av, info, mk('span','cnt', total + ' صوت'), mk('span','arrow','▾'));
+  h.addEventListener('click', () => { openKey = openKey === ck ? null : ck; draw(); });
 
-  const list = document.createElement('div'); list.className = 'opts';
-  options.forEach((opt, i) => {
-    const pct = total ? Math.round(counts[i] / total * 100) : 0;
-    const el = document.createElement('div');
-    el.className = 'opt' + (myVotes.has(keyOf(name,opt)) ? ' voted' : '');
-    el.dataset.g = gid; el.dataset.n = name; el.dataset.o = i;
-    const bar = document.createElement('div'); bar.className = 'bar'; bar.style.width = pct + '%';
-    const l = document.createElement('span'); l.className = 'l'; l.textContent = clean(opt);
-    const v = document.createElement('span'); v.className = 'v'; v.textContent = pct + '% (' + counts[i] + ')';
-    el.append(bar, l, v);
-    list.appendChild(el);
+  const ol = mk('div','opts');
+  g.opts.forEach((o,i) => {
+    const pct = total ? Math.round(counts[i]/total*100) : 0;
+    const el = mk('div','opt' + (mine.has(kk(name,o)) ? ' mine' : ''));
+    const bar = mk('div','bar'); bar.style.width = pct + '%';
+    el.append(bar, mk('span','',clean(o)), mk('span','v', pct + '% (' + counts[i] + ')'));
+    el.addEventListener('click', () => vote(gid, name, i));
+    ol.appendChild(el);
   });
-
-  card.append(head, list);
-  return card;
+  c.append(h, ol);
+  return c;
 }
 
-function renderGroup(gid){
-  const box = $(gid), g = groups[gid];
-  box.textContent = '';
-  g.list.forEach(name => box.appendChild(personCard(name, g.options, gid)));
-}
-
-function renderLeaderboard(){
+function drawLB(){
   const items = [];
-  Object.keys(groups).forEach(gid => {
-    const g = groups[gid];
-    g.list.forEach(name => g.options.forEach(opt => {
-      const c = votes[keyOf(name,opt)] || 0;
-      if (c > 0) items.push({name, option: clean(opt), count: c});
-    }));
-  });
-  items.sort((a,b)=>b.count-a.count);
-
-  const box = $('lb'); box.textContent = '';
-  if (!items.length){
-    const d = document.createElement('div'); d.className = 'person empty';
-    d.textContent = 'لا توجد أصوات مسجلة حتى الآن.'; box.appendChild(d); return;
-  }
-  items.slice(0, 50).forEach((it, i) => {
-    const badge = i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1);
-    const row = document.createElement('div'); row.className = 'lb';
-    const left = document.createElement('div');
-    const b = document.createElement('b'); b.textContent = badge + ' ' + it.name;
-    const s = document.createElement('div'); s.style.cssText = 'font-size:.8rem;color:#c084fc'; s.textContent = it.option;
-    left.append(b, s);
-    const right = document.createElement('div'); right.style.cssText = 'color:#f472b6;font-weight:bold';
-    right.textContent = it.count + ' أصوات';
-    row.append(left, right);
-    box.appendChild(row);
+  Object.keys(G).forEach(gid => G[gid].list.forEach(n => G[gid].opts.forEach(o => {
+    const c = votes[kk(n,o)] || 0; if (c > 0) items.push({n, o: clean(o), c});
+  })));
+  items.sort((a,b) => b.c - a.c);
+  const box = $('lbox'); box.textContent = '';
+  if (!items.length){ box.appendChild(mk('div','empty','لا توجد أصوات مسجلة حتى الآن.')); return; }
+  items.slice(0,50).forEach((it,i) => {
+    const r = mk('div','lb');
+    const t = mk('div','t'); t.append(mk('b','',it.n), mk('small','',it.o));
+    r.append(mk('div','rk', i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)), t, mk('div','n', it.c + ' أصوات'));
+    box.appendChild(r);
   });
 }
 
-function renderLogs(){
-  const tb = $('logBody'); tb.textContent = '';
-  logs.slice(0, 50).forEach(l => {
-    const tr = document.createElement('tr');
-    [l.name, l.option, l.time].forEach(t => {
-      const td = document.createElement('td'); td.textContent = t == null ? '' : t; tr.appendChild(td);
-    });
-    tb.appendChild(tr);
+function draw(){
+  ['girls','boys'].forEach(gid => {
+    const box = $(gid); box.textContent = '';
+    G[gid].list.forEach(n => box.appendChild(card(gid, n)));
   });
+  drawLB();
+  let s = 0; for (const k in votes) s += votes[k] || 0;
+  $('sTotal').textContent = s;
+  filter();
 }
 
-function render(){
-  renderGroup('girls'); renderGroup('boys'); renderLeaderboard();
-  let sum = 0; for (const k in votes) sum += votes[k] || 0;
-  $('totalVotes').textContent = sum;
-  filterNames();
-}
-
-async function castVote(gid, name, optIndex){
-  const opt = groups[gid].options[optIndex];
-  const key = keyOf(name, opt);
-  if (myVotes.has(key)){ toast('صوّتّ لهذه الصفة من قبل ✋'); return; }
-
-  votes[key] = (votes[key] || 0) + 1;
-  myVotes.add(key); saveMine(); render();
-  toast('تم تسجيل صوتك ✅');
-
+async function vote(gid, name, i){
+  const o = G[gid].opts[i], k = kk(name,o);
+  if (mine.has(k)){ toast('صوّتّ لهذه الصفة من قبل ✋'); return; }
+  votes[k] = (votes[k] || 0) + 1; mine.add(k); save(); draw(); toast('تم تسجيل صوتك ✅');
   try {
-    const cur = await sb('votes?select=count&vote_key=eq.' + encodeURIComponent(key));
-    const latest = (cur && cur[0] ? cur[0].count : 0) + 1;
-    await sb('votes?on_conflict=vote_key', {
-      method: 'POST',
-      headers: {'Prefer': 'resolution=merge-duplicates,return=minimal'},
-      body: {vote_key: key, count: latest}
-    });
-    votes[key] = latest; render();
-    const time = new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
-    await sb('logs', {method:'POST', headers:{'Prefer':'return=minimal'}, body:{name, option: clean(opt), time}});
+    const cur = await sb('votes?select=count&vote_key=eq.' + encodeURIComponent(k));
+    const n = (cur && cur[0] ? cur[0].count : 0) + 1;
+    await sb('votes?on_conflict=vote_key', {method:'POST', headers:{Prefer:'resolution=merge-duplicates,return=minimal'}, body:{vote_key:k, count:n}});
+    votes[k] = n; draw();
+    const time = new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});
+    await sb('logs', {method:'POST', headers:{Prefer:'return=minimal'}, body:{name, option:clean(o), time}});
   } catch(e){
-    votes[key] = Math.max(0, (votes[key] || 1) - 1);
-    myVotes.delete(key); saveMine(); render();
+    votes[k] = Math.max(0,(votes[k]||1)-1); mine.delete(k); save(); draw();
     toast('ما انحفظ الصوت، جرّب مرة ثانية ⚠️');
   }
 }
 
-['girls','boys'].forEach(gid => {
-  $(gid).addEventListener('click', e => {
-    const el = e.target.closest('.opt'); if (!el) return;
-    castVote(el.dataset.g, el.dataset.n, +el.dataset.o);
-  });
-});
+const T = {girls:['✨ قائمة الطالبات','اضغط على الاسم ثم اختر الصفة'], boys:['⚡ قائمة الطلاب','اضغط على الاسم ثم اختر الصفة'], lbox:['🏆 المتصدرون','أعلى الأصوات في الدفعة']};
+document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => {
+  tab = b.dataset.t;
+  document.querySelectorAll('.tab').forEach(x => x.classList.toggle('on', x === b));
+  ['girls','boys','lbox'].forEach(id => $(id).style.display = id === tab ? 'block' : 'none');
+  $('secT').textContent = T[tab][0]; $('secH').textContent = T[tab][1];
+  $('search').style.display = tab === 'lbox' ? 'none' : 'block';
+  window.scrollTo({top:0});
+}));
 
-const titles = {girls:'✨ قائمة الطالبات', boys:'⚡ قائمة الطلاب', lb:'🏆 المتصدرون في التصويت'};
-function switchTab(t){
-  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === t));
-  ['girls','boys','lb'].forEach(id => $(id).style.display = id === t ? 'block' : 'none');
-  $('secTitle').textContent = titles[t];
-  $('search').style.display = t === 'lb' ? 'none' : 'block';
-}
-document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
-
-function filterNames(){
+function filter(){
   const q = $('search').value.toLowerCase().trim();
-  document.querySelectorAll('.person[data-name]').forEach(c => {
-    c.style.display = c.dataset.name.toLowerCase().includes(q) ? 'block' : 'none';
-  });
+  document.querySelectorAll('.card[data-name]').forEach(c => c.style.display = c.dataset.name.toLowerCase().includes(q) ? '' : 'none');
 }
-$('search').addEventListener('input', filterNames);
+$('search').addEventListener('input', filter);
 
-let taps = 0, tapTimer;
+let taps = 0, th;
 $('lock').addEventListener('click', () => {
-  taps++; clearTimeout(tapTimer); tapTimer = setTimeout(()=>taps=0, 1500);
+  taps++; clearTimeout(th); th = setTimeout(() => taps = 0, 1500);
   if (taps >= 3){
     taps = 0;
-    const p = prompt('أدخل كلمة سر الأدمن:');
-    if (p === ADMIN_PASS){ $('admin').style.display = 'block'; loadLogs(); $('admin').scrollIntoView({behavior:'smooth'}); }
+    if (prompt('أدخل كلمة سر الأدمن:') === PASS){
+      $('admin').style.display = 'block';
+      sb('logs?select=*&order=id.desc&limit=50').then(d => {
+        const tb = $('logs'); tb.textContent = '';
+        (d || []).forEach(l => { const tr = mk('tr'); [l.name,l.option,l.time].forEach(x => tr.appendChild(mk('td','',x == null ? '' : x))); tb.appendChild(tr); });
+      }).catch(()=>{});
+      $('admin').scrollIntoView({behavior:'smooth'});
+    }
   }
 });
 
-$('resetBtn').addEventListener('click', async () => {
+$('reset').addEventListener('click', async () => {
   if (!confirm('هل أنت متأكد من مسح جميع الأصوات؟')) return;
   try {
     await sb('votes?count=gte.0', {method:'DELETE'});
     await sb('logs?id=gte.0', {method:'DELETE'});
-    votes = {}; logs = []; myVotes = new Set(); saveMine(); render(); renderLogs();
-    toast('تم التصفير ✅');
-  } catch(e){ toast('فشل التصفير، تأكد من سياسة DELETE في Supabase ⚠️'); }
+    votes = {}; mine = new Set(); save(); draw(); $('logs').textContent = ''; toast('تم التصفير ✅');
+  } catch(e){ toast('فشل التصفير، تأكد من سياسة DELETE ⚠️'); }
 });
 
-$('girlsCount').textContent = girlsList.length;
-$('boysCount').textContent = boysList.length;
-render();
-loadVotes();
-setInterval(loadVotes, 4000);
+$('sGirls').textContent = G.girls.list.length;
+$('sBoys').textContent = G.boys.list.length;
+draw(); pull(); setInterval(pull, 4000);
 })();
 </script>
 </body>
