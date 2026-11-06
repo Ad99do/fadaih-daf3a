@@ -48,24 +48,17 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
         }
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #180d24;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #5b21b6;
-            border-radius: 4px;
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #180d24; }
+        ::-webkit-scrollbar-thumb { background: #5b21b6; border-radius: 4px; }
     </style>
 </head>
 <body class="bg-[#12081d] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-purple-500 selection:text-white pb-12">
 
-    <!-- Toast Notification Container -->
+    <!-- Toast Container -->
     <div id="toastContainer" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-11/12 max-w-md pointer-events-none"></div>
 
-    <!-- Header / Hero Section -->
+    <!-- Header -->
     <header class="relative bg-gradient-to-b from-[#2a1145] via-[#200b36] to-[#12081d] pt-8 pb-16 px-4 rounded-b-[2.5rem] shadow-2xl border-b border-purple-900/40">
         <div class="max-w-2xl mx-auto text-center relative z-10">
             <div class="flex justify-between items-center mb-6">
@@ -74,8 +67,8 @@
                     دفعتنا تحت المجهر 🔍
                 </span>
                 <div class="flex items-center gap-3">
-                    <button onclick="triggerConfetti()" class="text-xl hover:scale-125 transition-transform" title="احتفال! ✨">🎉</button>
-                    <button id="adminLockBtn" class="text-slate-400 hover:text-purple-300 transition-colors p-2 rounded-full hover:bg-white/5" title="لوحة الأدمن">
+                    <button onclick="triggerConfetti()" class="text-xl hover:scale-125 transition-transform">🎉</button>
+                    <button id="adminLockBtn" class="text-slate-400 hover:text-purple-300 transition-colors p-2 rounded-full hover:bg-white/5">
                         <i class="fas fa-lock"></i>
                     </button>
                 </div>
@@ -88,56 +81,51 @@
                 اختار التصنيف وشوف النسبة المئوية فوراً.. وتقدر تصوّت لأكثر من صفة لأصدقائك!
             </p>
         </div>
-
-        <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-            <div class="absolute top-10 right-10 w-32 h-32 bg-purple-500 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-5 left-10 w-40 h-40 bg-pink-500 rounded-full blur-3xl"></div>
-        </div>
     </header>
 
-    <!-- Main Content Container -->
+    <!-- Main Content -->
     <main class="max-w-2xl mx-auto px-4 -mt-10 relative z-20 w-full flex-grow">
         
-        <!-- Stats Grid Cards -->
+        <!-- Stats Grid -->
         <div class="grid grid-cols-3 gap-3 mb-6">
-            <div class="glass-card-light text-slate-800 rounded-2xl p-4 text-center border border-purple-100/50 transform hover:-translate-y-1 transition-all">
+            <div class="glass-card-light text-slate-800 rounded-2xl p-4 text-center border border-purple-100/50">
                 <div class="text-2xl font-black text-purple-900" id="totalVotesCount">0</div>
                 <div class="text-[11px] font-bold text-slate-500 mt-1">إجمالي التصويتات</div>
             </div>
-            <div class="glass-card-light text-slate-800 rounded-2xl p-4 text-center border border-purple-100/50 transform hover:-translate-y-1 transition-all">
+            <div class="glass-card-light text-slate-800 rounded-2xl p-4 text-center border border-purple-100/50">
                 <div class="text-2xl font-black text-pink-600" id="girlsCount">24</div>
                 <div class="text-[11px] font-bold text-slate-500 mt-1">طالبة 👩</div>
             </div>
-            <div class="glass-card-light text-slate-800 rounded-2xl p-4 text-center border border-purple-100/50 transform hover:-translate-y-1 transition-all">
+            <div class="glass-card-light text-slate-800 rounded-2xl p-4 text-center border border-purple-100/50">
                 <div class="text-2xl font-black text-indigo-600" id="boysCount">29</div>
                 <div class="text-[11px] font-bold text-slate-500 mt-1">طالب 👦</div>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
+        <!-- Tabs -->
         <div class="flex gap-2 p-1.5 bg-[#1e0f30]/90 backdrop-blur-md rounded-2xl border border-purple-800/40 mb-5 shadow-xl">
-            <button id="tab-girls" onclick="switchTab('girls')" class="flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-pink-950/40">
+            <button id="tab-girls" onclick="switchTab('girls')" class="flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg">
                 <span>👩</span> البنات
             </button>
-            <button id="tab-boys" onclick="switchTab('boys')" class="flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold text-purple-300 hover:text-white hover:bg-white/5 transition-all flex items-center justify-center gap-2">
+            <button id="tab-boys" onclick="switchTab('boys')" class="flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold text-purple-300 hover:text-white transition-all flex items-center justify-center gap-2">
                 <span>👦</span> الأولاد
             </button>
-            <button id="tab-leaderboard" onclick="switchTab('leaderboard')" class="flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold text-purple-300 hover:text-white hover:bg-white/5 transition-all flex items-center justify-center gap-2">
+            <button id="tab-leaderboard" onclick="switchTab('leaderboard')" class="flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold text-purple-300 hover:text-white transition-all flex items-center justify-center gap-2">
                 <span>🏆</span> المتصدرون
             </button>
         </div>
 
-        <!-- Search Box Filter -->
+        <!-- Search -->
         <div class="relative mb-6">
             <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-purple-400/60 text-sm"></i>
             <input type="text" id="searchInput" onkeyup="filterNames()" placeholder="ابحث عن اسم بالدفعة..." 
-                class="w-full bg-[#1b0c2e] text-white placeholder-purple-300/40 pr-11 pl-10 py-3.5 rounded-2xl border border-purple-800/40 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-sm transition-all shadow-inner">
+                class="w-full bg-[#1b0c2e] text-white placeholder-purple-300/40 pr-11 pl-10 py-3.5 rounded-2xl border border-purple-800/40 focus:outline-none focus:border-purple-500 text-sm shadow-inner">
             <button id="clearSearch" onclick="clearSearchInput()" class="hidden absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs">
                 <i class="fas fa-times-circle"></i>
             </button>
         </div>
 
-        <!-- Section Header -->
+        <!-- Title -->
         <div class="flex justify-between items-center mb-4 px-2">
             <h2 id="sectionTitleText" class="text-base font-bold text-purple-200 flex items-center gap-2">
                 <span>✨</span> قائمة الطالبات
@@ -147,18 +135,14 @@
             </span>
         </div>
 
-        <!-- Tab 1: Girls Section -->
+        <!-- Sections -->
         <div id="girlsSection" class="space-y-4"></div>
-
-        <!-- Tab 2: Boys Section -->
         <div id="boysSection" class="space-y-4 hidden"></div>
-
-        <!-- Tab 3: Leaderboard Section -->
         <div id="leaderboardSection" class="space-y-3 hidden">
             <div id="leaderboardContent"></div>
         </div>
 
-        <!-- Admin Panel Modal Section -->
+        <!-- Admin Section -->
         <div id="adminSection" class="hidden mt-8 p-6 bg-[#180929] rounded-2xl border border-red-500/30 shadow-2xl">
             <div class="flex items-center justify-between mb-4 border-b border-red-500/20 pb-3">
                 <h3 class="text-lg font-bold text-red-400 flex items-center gap-2">
@@ -167,16 +151,9 @@
                 <button onclick="closeAdminPanel()" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
             </div>
             
-            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
-                مرحباً بالأدمن! من هنا يمكنك الاطلاع على سجل جميع التصويتات الحية أو إعادة ضبط وإلغاء التصويتات.
-            </p>
-
             <div class="flex flex-wrap gap-3 mb-6">
-                <button onclick="confirmResetData()" class="bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-red-500/50 transition-all flex items-center gap-2 shadow-lg">
-                    <i class="fas fa-trash-alt"></i> إيرستر / تصفير جميع الأصوات ⚠️
-                </button>
-                <button onclick="exportVotesJSON()" class="bg-purple-700/80 hover:bg-purple-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-purple-500/50 transition-all flex items-center gap-2">
-                    <i class="fas fa-download"></i> تصدير البيانات (JSON)
+                <button onclick="confirmResetData()" class="bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-red-500/50">
+                    <i class="fas fa-trash-alt"></i> تصفير جميع الأصوات ⚠️
                 </button>
             </div>
 
@@ -196,16 +173,15 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="mt-12 text-center text-xs text-purple-400/50 py-4">
         يلا نشوف الفضايح 🤣 &bull; تطبيق استفتاء الدفعة الترفيهي
     </footer>
 
-    <!-- JavaScript Logic -->
+    <!-- Logic Script -->
     <script>
         const SUPABASE_URL = "https://kstnagfousuiwbnikkwi.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_7xQHPTjLP82fhRQjVY1vfw_nHGBbKKt";
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let _supabase = null;
 
         const boysOptions = [
             "1/ الحفار الخسيس 🎓", "2/ بتاع الونسه 🫥", "3/ الخسيس 😐", 
@@ -228,65 +204,12 @@
         let votesData = {};
         let logsData = [];
 
-        async function loadData() {
-            try {
-                const { data: votes } = await _supabase.from('votes').select('*');
-                if (votes) {
-                    votesData = {};
-                    votes.forEach(v => { votesData[v.vote_key] = v.count; });
-                }
-                const { data: logs } = await _supabase.from('logs').select('*').order('id', { ascending: false });
-                if (logs) logsData = logs;
-            } catch(e) {
-                console.error("Cloud Connection Exception", e);
-            }
-            refreshUI();
-        }
-
-        _supabase.channel('public:votes')
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'votes' }, payload => {
-              if (payload.new) {
-                  votesData[payload.new.vote_key] = payload.new.count;
-                  refreshUI();
-              }
-          }).subscribe();
-
-        window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('boysCount').innerText = boysList.length;
-            document.getElementById('girlsCount').innerText = girlsList.length;
-            refreshUI();
-            loadData();
-        });
-
-        function switchTab(tabName) {
-            const tabs = ['girls', 'boys', 'leaderboard'];
-            tabs.forEach(tab => {
-                const btn = document.getElementById(`tab-${tab}`);
-                const sec = document.getElementById(`${tab}Section`);
-                if (tab === tabName) {
-                    btn.className = "flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-950/50";
-                    sec.classList.remove('hidden');
-                } else {
-                    btn.className = "flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold text-purple-300 hover:text-white hover:bg-white/5 transition-all flex items-center justify-center gap-2";
-                    sec.classList.add('hidden');
-                }
-            });
-
-            const titleText = document.getElementById('sectionTitleText');
-            if (tabName === 'girls') titleText.innerHTML = `<span>✨</span> قائمة الطالبات`;
-            else if (tabName === 'boys') titleText.innerHTML = `<span>⚡</span> قائمة الطلاب`;
-            else if (tabName === 'leaderboard') {
-                titleText.innerHTML = `<span>🏆</span> قائمة الأكثر تفاعلاً والتصدر`;
-                triggerConfetti();
-            }
-        }
-
         function renderList(list, options, containerId) {
             const container = document.getElementById(containerId);
             if (!container) return;
             container.innerHTML = '';
 
-            list.forEach((name, index) => {
+            list.forEach((name) => {
                 let totalPersonVotes = 0;
                 options.forEach(opt => {
                     const key = `${name}_${opt}`;
@@ -294,7 +217,7 @@
                 });
 
                 const card = document.createElement('div');
-                card.className = "person-card bg-[#1a0b2e] rounded-2xl p-4 md:p-5 border border-purple-800/30 shadow-lg hover:border-purple-600/40 transition-all";
+                card.className = "person-card bg-[#1a0b2e] rounded-2xl p-4 border border-purple-800/30 shadow-lg";
                 card.setAttribute('data-name', name);
 
                 let optionsHTML = '';
@@ -306,13 +229,11 @@
 
                     optionsHTML += `
                         <div onclick="castVote('${name}', '${opt}')" 
-                             class="group relative overflow-hidden bg-[#24103c] hover:bg-[#2e154d] border border-purple-900/40 rounded-xl p-3 flex justify-between items-center cursor-pointer transition-all active:scale-[0.99]">
+                             class="group relative overflow-hidden bg-[#24103c] hover:bg-[#2e154d] border border-purple-900/40 rounded-xl p-3 flex justify-between items-center cursor-pointer active:scale-[0.99]">
                             <div class="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-purple-600/30 to-pink-600/20 transition-all duration-500" style="width: ${percent}%"></div>
-                            
                             <div class="relative z-10 flex items-center gap-2">
-                                <span class="text-xs md:text-sm font-medium text-purple-100 group-hover:text-white transition-colors">${cleanOpt}</span>
+                                <span class="text-xs md:text-sm font-medium text-purple-100 group-hover:text-white">${cleanOpt}</span>
                             </div>
-                            
                             <div class="relative z-10 flex items-center gap-2">
                                 <span class="text-xs font-bold text-purple-300">${percent}%</span>
                                 <span class="text-[10px] text-purple-400/60 font-mono">(${count})</span>
@@ -322,48 +243,21 @@
                 });
 
                 card.innerHTML = `
-                    <div class="flex justify-between items-center mb-3.5 pb-2 border-b border-purple-900/30">
+                    <div class="flex justify-between items-center mb-3 pb-2 border-b border-purple-900/30">
                         <div class="flex items-center gap-2.5">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center font-bold text-white text-xs shadow-md">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center font-bold text-white text-xs">
                                 ${name.charAt(0)}
                             </div>
                             <span class="text-base font-bold text-white">${name}</span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs bg-purple-950 text-purple-300 px-2.5 py-1 rounded-full border border-purple-800/40 font-mono">
-                                أصوات: ${totalPersonVotes}
-                            </span>
-                        </div>
+                        <span class="text-xs bg-purple-950 text-purple-300 px-2.5 py-1 rounded-full border border-purple-800/40 font-mono">
+                            أصوات: ${totalPersonVotes}
+                        </span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        ${optionsHTML}
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">${optionsHTML}</div>
                 `;
                 container.appendChild(card);
             });
-        }
-
-        async function castVote(name, option) {
-            const key = `${name}_${option}`;
-            const newCount = (votesData[key] || 0) + 1;
-            const timeStr = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
-
-            votesData[key] = newCount;
-            logsData.unshift({ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr });
-            
-            showToast(`تم تسجيل تصويتك لـ ${name} بنجاح! 🔥`, "success");
-            refreshUI();
-
-            if (newCount % 5 === 0) {
-                triggerConfetti();
-            }
-
-            try {
-                await _supabase.from('votes').upsert({ vote_key: key, count: newCount });
-                await _supabase.from('logs').insert([{ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr }]);
-            } catch(e) {
-                console.error("Supabase write error", e);
-            }
         }
 
         function refreshUI() {
@@ -375,4 +269,112 @@
         }
 
         function calculateTotalVotes() {
-            let sum 
+            let sum = 0;
+            for (let k in votesData) sum += votesData[k];
+            const elem = document.getElementById('totalVotesCount');
+            if (elem) elem.innerText = sum;
+        }
+
+        function renderLeaderboard() {
+            const container = document.getElementById('leaderboardContent');
+            if (!container) return;
+            const items = [];
+
+            for (let key in votesData) {
+                if (votesData[key] > 0) {
+                    const parts = key.split('_');
+                    if (parts.length >= 2) {
+                        items.push({
+                            name: parts[0],
+                            option: parts.slice(1).join('_').replace(/^\d+\//, '').trim(),
+                            count: votesData[key]
+                        });
+                    }
+                }
+            }
+
+            items.sort((a, b) => b.count - a.count);
+
+            if (items.length === 0) {
+                container.innerHTML = `<div class="bg-[#1a0b2e] rounded-2xl p-8 text-center border border-purple-800/30 text-sm text-purple-300/70">لا توجد أصوات مسجلة حتى الآن.</div>`;
+                return;
+            }
+
+            let html = '<div class="space-y-2.5">';
+            items.forEach((item, rank) => {
+                let badge = rank === 0 ? '🥇' : rank === 1 ? '🥈' : rank === 2 ? '🥉' : `#${rank + 1}`;
+                html += `
+                    <div class="bg-[#1a0b2e] border border-purple-800/30 rounded-2xl p-3.5 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 flex items-center justify-center font-bold text-base">${badge}</div>
+                            <div>
+                                <div class="text-sm font-bold text-white">${item.name}</div>
+                                <div class="text-xs text-purple-300/80">${item.option}</div>
+                            </div>
+                        </div>
+                        <div class="bg-purple-950/80 text-amber-300 border border-purple-800/40 px-3 py-1 rounded-xl text-xs font-bold">
+                            ${item.count} أصوات
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        async function castVote(name, option) {
+            const key = `${name}_${option}`;
+            const newCount = (votesData[key] || 0) + 1;
+            const timeStr = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+
+            votesData[key] = newCount;
+            logsData.unshift({ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr });
+            
+            showToast(`تم تسجيل تصويتك لـ ${name}! 🔥`, "success");
+            refreshUI();
+
+            if (_supabase) {
+                try {
+                    await _supabase.from('votes').upsert({ vote_key: key, count: newCount });
+                    await _supabase.from('logs').insert([{ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr }]);
+                } catch(e){}
+            }
+        }
+
+        function switchTab(tabName) {
+            ['girls', 'boys', 'leaderboard'].forEach(tab => {
+                const btn = document.getElementById(`tab-${tab}`);
+                const sec = document.getElementById(`${tab}Section`);
+                if (tab === tabName) {
+                    btn.className = "flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg";
+                    sec.classList.remove('hidden');
+                } else {
+                    btn.className = "flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold text-purple-300 hover:text-white transition-all flex items-center justify-center gap-2";
+                    sec.classList.add('hidden');
+                }
+            });
+
+            const titleText = document.getElementById('sectionTitleText');
+            if (tabName === 'girls') titleText.innerHTML = `<span>✨</span> قائمة الطالبات`;
+            else if (tabName === 'boys') titleText.innerHTML = `<span>⚡</span> قائمة الطلاب`;
+            else if (tabName === 'leaderboard') titleText.innerHTML = `<span>🏆</span> قائمة الأكثر تفاعلاً والتصدر`;
+        }
+
+        function filterNames() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            document.querySelectorAll('.person-card').forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                card.style.display = name.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        function clearSearchInput() {
+            document.getElementById('searchInput').value = '';
+            filterNames();
+        }
+
+        function showToast(message, type = "info") {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `p-3.5 rounded-2xl border bg-purple-900 border-purple-500 text-white shadow-2xl text-xs font-medium flex items-center justify
