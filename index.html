@@ -3,378 +3,588 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>يلا نشوف الفضايح 🤣 | استفتاء الدفعة</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Canvas Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <!-- Supabase JS Library -->
+    <title>يلا نشوف الفضايح 🤣</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#1e102d',
-                            header: '#2e1847',
-                            card: '#3b1d5c',
-                            purple: '#6b21a8',
-                            accent: '#a855f7',
-                            pink: '#ec4899',
-                            gold: '#eab308'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+
     <style>
-        @keyframes pulse-subtle {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+        :root {
+            --bg-dark: #12081d;
+            --purple-header: #2e1847;
+            --purple-card: #1a0b2e;
+            --purple-btn: #6b21a8;
+            --purple-accent: #a855f7;
+            --pink-accent: #ec4899;
+            --text-main: #ffffff;
+            --text-sub: #b3a1c9;
         }
-        .animate-pulse-subtle {
-            animation: pulse-subtle 3s infinite ease-in-out;
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        .glass-card-light {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+
+        body {
+            background-color: var(--bg-dark);
+            min-height: 100vh;
+            color: var(--text-main);
+            padding-bottom: 40px;
         }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #180d24; }
-        ::-webkit-scrollbar-thumb { background: #5b21b6; border-radius: 4px; }
+
+        /* Header Style */
+        .hero-header {
+            background: linear-gradient(180deg, #2a1145 0%, #1a0b2e 100%);
+            color: white;
+            padding: 25px 20px 45px 20px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .badge-pill {
+            background: rgba(107, 33, 168, 0.4);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #e9d5ff;
+        }
+
+        .admin-lock {
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #a855f7;
+            opacity: 0.8;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #e9d5ff, #f472b6, #fef08a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: -30px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 12px 5px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .stat-num {
+            font-size: 1.4rem;
+            font-weight: 900;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            font-weight: bold;
+            margin-top: 3px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            background: rgba(30, 15, 48, 0.8);
+            padding: 6px;
+            border-radius: 16px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 5px;
+            border: none;
+            background: transparent;
+            color: #c084fc;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(90deg, #7e22ce, #db2777);
+            color: white;
+            box-shadow: 0 4px 15px rgba(219, 39, 119, 0.4);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            background: #1b0c2e;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 0 5px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #e9d5ff;
+        }
+
+        .section-hint {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            background: rgba(46, 24, 71, 0.6);
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        .person-card {
+            background: var(--purple-card);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .person-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .person-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .person-rank {
+            font-size: 0.75rem;
+            color: #c084fc;
+            background: rgba(107, 33, 168, 0.4);
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+
+        .options-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .option-item {
+            background: #24103c;
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-progress {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(270deg, rgba(168, 85, 247, 0.3), rgba(236, 72, 153, 0.2));
+            z-index: 1;
+            transition: width 0.4s ease;
+        }
+
+        .option-label {
+            position: relative;
+            z-index: 2;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #f3e8ff;
+        }
+
+        .option-val {
+            position: relative;
+            z-index: 2;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #f472b6;
+        }
+
+        .lb-card {
+            background: var(--purple-card);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 14px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .admin-panel {
+            display: none;
+            background: #180929;
+            padding: 20px;
+            border-radius: 18px;
+            margin-top: 20px;
+            border: 1px solid #ef4444;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px;
+            text-align: right;
+            font-size: 0.85rem;
+        }
+
+        th { background: #2e1847; color: #f472b6; }
     </style>
 </head>
-<body class="bg-[#12081d] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-purple-500 selection:text-white pb-12">
+<body>
 
-    <!-- Toast Container -->
-    <div id="toastContainer" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-11/12 max-w-md pointer-events-none"></div>
-
-    <!-- Header -->
-    <header class="relative bg-gradient-to-b from-[#2a1145] via-[#200b36] to-[#12081d] pt-8 pb-16 px-4 rounded-b-[2.5rem] shadow-2xl border-b border-purple-900/40">
-        <div class="max-w-2xl mx-auto text-center relative z-10">
-            <div class="flex justify-between items-center mb-6">
-                <span class="inline-flex items-center gap-2 bg-purple-900/60 text-purple-200 px-4 py-1.5 rounded-full text-xs font-bold border border-purple-500/30 backdrop-blur-md">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                    دفعتنا تحت المجهر 🔍
-                </span>
-                <div class="flex items-center gap-3">
-                    <button onclick="triggerConfetti()" class="text-xl hover:scale-125 transition-transform">🎉</button>
-                    <button id="adminLockBtn" class="text-slate-400 hover:text-purple-300 transition-colors p-2 rounded-full hover:bg-white/5">
-                        <i class="fas fa-lock"></i>
-                    </button>
-                </div>
-            </div>
-
-            <h1 class="text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-300 to-amber-200 mb-3 animate-pulse-subtle">
-                يلا نشوف الفضايح 🤣
-            </h1>
-            <p class="text-purple-200/80 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
-                اختار التصنيف وشوف النسبة المئوية فوراً.. وتقدر تصوّت لأكثر من صفة لأصدقائك!
-            </p>
+<div class="hero-header">
+    <div class="top-bar">
+        <span class="badge-pill">دفعتنا تحت المجهر 🔍</span>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <span>♦️ 🤣</span>
+            <i class="fas fa-lock admin-lock" id="adminLockIcon"></i>
         </div>
-    </header>
+    </div>
+    <h1 class="hero-title">يلا نشوف الفضايح 🤣</h1>
+    <p class="hero-subtitle">اختار التصنيف وشوف النسبة المئوية فوراً.. وتقدر تصوّت لأكثر من صفة!</p>
+</div>
 
-    <!-- Main Content -->
-    <main class="max-w-2xl mx-auto px-4 -mt-10 relative z-20 w-full flex-grow">
-        
-        <!-- Stats Grid -->
-        <div class="grid grid-cols-3 gap-3 mb-6">
-            <div class="glass-card-light text-slate-800 rounded-2xl p-4 text-center border border-purple-100/50">
-                <div class="text-2xl font-black text-purple-900" id="totalVotesCount">0</div>
-                <div class="text-[11px] font-bold text-slate-500 mt-1">إجمالي التصويتات</div>
-            </div>
-            <div class="glass-card-light text-slate-800 rounded-2xl p-4 text-center border border-purple-100/50">
-                <div class="text-2xl font-black text-pink-600" id="girlsCount">24</div>
-                <div class="text-[11px] font-bold text-slate-500 mt-1">طالبة 👩</div>
-            </div>
-            <div class="glass-card-light text-slate-800 rounded-2xl p-4 text-center border border-purple-100/50">
-                <div class="text-2xl font-black text-indigo-600" id="boysCount">29</div>
-                <div class="text-[11px] font-bold text-slate-500 mt-1">طالب 👦</div>
-            </div>
+<div class="container">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-num" style="color:#581c87" id="totalVotesCount">0</div>
+            <div class="stat-label">تصويت مسجل</div>
         </div>
-
-        <!-- Tabs -->
-        <div class="flex gap-2 p-1.5 bg-[#1e0f30]/90 backdrop-blur-md rounded-2xl border border-purple-800/40 mb-5 shadow-xl">
-            <button id="tab-girls" onclick="switchTab('girls')" class="flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg">
-                <span>👩</span> البنات
-            </button>
-            <button id="tab-boys" onclick="switchTab('boys')" class="flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold text-purple-300 hover:text-white transition-all flex items-center justify-center gap-2">
-                <span>👦</span> الأولاد
-            </button>
-            <button id="tab-leaderboard" onclick="switchTab('leaderboard')" class="flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold text-purple-300 hover:text-white transition-all flex items-center justify-center gap-2">
-                <span>🏆</span> المتصدرون
-            </button>
+        <div class="stat-card">
+            <div class="stat-num" style="color:#db2777" id="girlsCount">24</div>
+            <div class="stat-label">طالبة 👩</div>
         </div>
-
-        <!-- Search -->
-        <div class="relative mb-6">
-            <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-purple-400/60 text-sm"></i>
-            <input type="text" id="searchInput" onkeyup="filterNames()" placeholder="ابحث عن اسم بالدفعة..." 
-                class="w-full bg-[#1b0c2e] text-white placeholder-purple-300/40 pr-11 pl-10 py-3.5 rounded-2xl border border-purple-800/40 focus:outline-none focus:border-purple-500 text-sm shadow-inner">
-            <button id="clearSearch" onclick="clearSearchInput()" class="hidden absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs">
-                <i class="fas fa-times-circle"></i>
-            </button>
+        <div class="stat-card">
+            <div class="stat-num" style="color:#4f46e5" id="boysCount">29</div>
+            <div class="stat-label">طالب 👦</div>
         </div>
+    </div>
 
-        <!-- Title -->
-        <div class="flex justify-between items-center mb-4 px-2">
-            <h2 id="sectionTitleText" class="text-base font-bold text-purple-200 flex items-center gap-2">
-                <span>✨</span> قائمة الطالبات
-            </h2>
-            <span class="text-xs text-purple-300/60 bg-purple-950/50 px-3 py-1 rounded-lg border border-purple-800/30">
-                اضغط على أي صفة لتأكيد تصويتك
-            </span>
-        </div>
+    <div class="nav-tabs">
+        <button id="tab-girls" class="tab-btn active" onclick="switchTab('girls')">👩 البنات</button>
+        <button id="tab-boys" class="tab-btn" onclick="switchTab('boys')">👦 الأولاد</button>
+        <button id="tab-leaderboard" class="tab-btn" onclick="switchTab('leaderboard')">🏆 المتصدرون</button>
+    </div>
 
-        <!-- Sections -->
-        <div id="girlsSection" class="space-y-4"></div>
-        <div id="boysSection" class="space-y-4 hidden"></div>
-        <div id="leaderboardSection" class="space-y-3 hidden">
-            <div id="leaderboardContent"></div>
-        </div>
+    <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن اسم بالدفعة..." onkeyup="filterNames()">
+    </div>
 
-        <!-- Admin Section -->
-        <div id="adminSection" class="hidden mt-8 p-6 bg-[#180929] rounded-2xl border border-red-500/30 shadow-2xl">
-            <div class="flex items-center justify-between mb-4 border-b border-red-500/20 pb-3">
-                <h3 class="text-lg font-bold text-red-400 flex items-center gap-2">
-                    <i class="fas fa-user-shield"></i> لوحة التحكم السرية الأدمن
-                </h3>
-                <button onclick="closeAdminPanel()" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
-            </div>
-            
-            <div class="flex flex-wrap gap-3 mb-6">
-                <button onclick="confirmResetData()" class="bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-red-500/50">
-                    <i class="fas fa-trash-alt"></i> تصفير جميع الأصوات ⚠️
-                </button>
-            </div>
+    <div id="sectionTitleHeader" class="section-header">
+        <span class="section-title" id="sectionTitleText">✨ قائمة الطالبات</span>
+        <span class="section-hint">اضغط على أي صفة لتأكيد تصويتك</span>
+    </div>
 
-            <div class="overflow-x-auto max-h-60 rounded-xl border border-purple-900/50">
-                <table id="votesTable" class="w-full text-right text-xs text-slate-300">
-                    <thead class="bg-purple-950/80 text-purple-200 sticky top-0">
-                        <tr>
-                            <th class="p-3 border-b border-purple-900">المُصوَّت عليه</th>
-                            <th class="p-3 border-b border-purple-900">الصفة المختارة</th>
-                            <th class="p-3 border-b border-purple-900">الوقت</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-purple-900/30"></tbody>
-                </table>
-            </div>
-        </div>
+    <div id="girlsSection"></div>
+    <div id="boysSection" style="display:none;"></div>
+    <div id="leaderboardSection" style="display:none;">
+        <div id="leaderboardContent"></div>
+    </div>
 
-    </main>
+    <!-- Admin Panel -->
+    <div id="adminSection" class="admin-panel">
+        <h2 style="color:#f87171;">🔒 لوحة التحكم السرية للأدمن</h2>
+        <button onclick="resetAllData()" style="background:#dc3545; color:white; border:none; padding:8px 12px; border-radius:8px; margin: 10px 0; cursor:pointer; font-weight:bold;">تصفير جميع الأصوات ⚠️</button>
+        <table id="votesTable">
+            <thead>
+                <tr>
+                    <th>المُصوَّت عليه</th>
+                    <th>الصفة المختارة</th>
+                    <th>وقت التصويت</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
 
-    <footer class="mt-12 text-center text-xs text-purple-400/50 py-4">
-        يلا نشوف الفضايح 🤣 &bull; تطبيق استفتاء الدفعة الترفيهي
-    </footer>
+<script>
+    const SUPABASE_URL = "https://kstnagfousuiwbnikkwi.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_7xQHPTjLP82fhRQjVY1vfw_nHGBbKKt";
+    let _supabase = null;
 
-    <!-- Logic Script -->
-    <script>
-        const SUPABASE_URL = "https://kstnagfousuiwbnikkwi.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_7xQHPTjLP82fhRQjVY1vfw_nHGBbKKt";
-        let _supabase = null;
+    const boysOptions = [
+        "1/ الحفار الخسيس 🎓", "2/ بتاع الونسه 🫥", "3/ الخسيس 😐", 
+        "4/ نجم الدفعة ♦️", "5/ اجتماعي ❤️", "6/ مبتعد عن الدفعة 😬", 
+        "7/ ملك التصرف الساي 🤣", "8/ المهذب ❣️", "9/ الطقه والقهوة 🥴", 
+        "10/ الموهوم 😶", "11/ البساعد الناس 🤍", "12/ صاحب الضحكه المميزه 🤣🌝", 
+        "13/ الخفيف الرشيق ⚡"
+    ];
+    
+    const girlsOptions = [
+        "1/ إجتماعيه ✨", "2/ الحفارة 🎓", "3/ السواطة 🤣", 
+        "4/ القطيعه 🤣", "5/ المهذبه ❣️", "6/ البعيده عن الدفعه 😐", 
+        "7/ نجمة الدفعة ♦️", "8/ العايشه الدور 🤣", "9/ الخسيسه 😶", 
+        "10/ أم لساان طويل 👅", "11/ البتنوم في المحاضره 😴", "12/ الخفيفه الرشيقه ⚡"
+    ];
 
-        const boysOptions = [
-            "1/ الحفار الخسيس 🎓", "2/ بتاع الونسه 🫥", "3/ الخسيس 😐", 
-            "4/ نجم الدفعة ♦️", "5/ اجتماعي ❤️", "6/ مبتعد عن الدفعة 😬", 
-            "7/ ملك التصرف الساي 🤣", "8/ المهذب ❣️", "9/ الطقه والقهوة 🥴", 
-            "10/ الموهوم 😶", "11/ البساعد الناس 🤍", "12/ صاحب الضحكه المميزه 🤣🌝", 
-            "13/ الخفيف الرشيق ⚡"
-        ];
-        
-        const girlsOptions = [
-            "1/ إجتماعيه ✨", "2/ الحفارة 🎓", "3/ السواطة 🤣", 
-            "4/ القطيعه 🤣", "5/ المهذبه ❣️", "6/ البعيده عن الدفعه 😐", 
-            "7/ نجمة الدفعة ♦️", "8/ العايشه الدور 🤣", "9/ الخسيسه 😶", 
-            "10/ أم لساان طويل 👅", "11/ البتنوم في المحاضره 😴", "12/ الخفيفه الرشيقه ⚡"
-        ];
+    const boysList = ["منذر", "ايمن", "مجتبى سليمان", "ماهر خالد", "محمد عثمان جاد الله", "محمد حسن", "احمد البشير", "احمد سامي", "حسام المكنه", "محمد عاطف", "اواب", "محمد خالد", "الجيلى", "التجاني", "المثنى مزمل", "عبدالله", "نزار", "أمجد", "عبدالرحيم", "محمد خوجلي", "عبدالرحمن رضوان", "المقداد صلاح", "محمد", "ادم تصرف ساي", "وائل", "مبارك خليل", "عبدالله عبد الله", "الطيب كمال الطيب", "عاصم"];
+    const girlsList = ["وعد أمين", "مأب", "نفيسه", "رغده", "مروه", "شهد", "قمر", "رهام", "ساجده", "سبأ", "ريان", "ترتيل", "دعاء", "دلال", "دعاء 2", "سارة", "امنية", "زينب", "ابرار", "ضحى", "مأب التانيه", "شهد محمد", "وعد عامر", "عناب"];
 
-        const boysList = ["منذر", "ايمن", "مجتبى سليمان", "ماهر خالد", "محمد عثمان جاد الله", "محمد حسن", "احمد البشير", "احمد سامي", "حسام المكنه", "محمد عاطف", "اواب", "محمد خالد", "الجيلى", "التجاني", "المثنى مزمل", "عبدالله", "نزار", "أمجد", "عبدالرحيم", "محمد خوجلي", "عبدالرحمن رضوان", "المقداد صلاح", "محمد", "ادم تصرف ساي", "وائل", "مبارك خليل", "عبدالله عبد الله", "الطيب كمال الطيب", "عاصم"];
-        const girlsList = ["وعد أمين", "مأب", "نفيسه", "رغده", "مروه", "شهد", "قمر", "رهام", "ساجده", "سبأ", "ريان", "ترتيل", "دعاء", "دلال", "دعاء 2", "سارة", "امنية", "زينب", "ابرار", "ضحى", "مأب التانيه", "شهد محمد", "وعد عامر", "عناب"];
+    let votesData = {};
+    let logsData = [];
 
-        let votesData = {};
-        let logsData = [];
+    function renderList(list, options, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
 
-        function renderList(list, options, containerId) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            container.innerHTML = '';
-
-            list.forEach((name) => {
-                let totalPersonVotes = 0;
-                options.forEach(opt => {
-                    const key = `${name}_${opt}`;
-                    totalPersonVotes += (votesData[key] || 0);
-                });
-
-                const card = document.createElement('div');
-                card.className = "person-card bg-[#1a0b2e] rounded-2xl p-4 border border-purple-800/30 shadow-lg";
-                card.setAttribute('data-name', name);
-
-                let optionsHTML = '';
-                options.forEach(opt => {
-                    const key = `${name}_${opt}`;
-                    const count = votesData[key] || 0;
-                    const percent = totalPersonVotes > 0 ? Math.round((count / totalPersonVotes) * 100) : 0;
-                    const cleanOpt = opt.replace(/^\d+\//, '').trim();
-
-                    optionsHTML += `
-                        <div onclick="castVote('${name}', '${opt}')" 
-                             class="group relative overflow-hidden bg-[#24103c] hover:bg-[#2e154d] border border-purple-900/40 rounded-xl p-3 flex justify-between items-center cursor-pointer active:scale-[0.99]">
-                            <div class="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-purple-600/30 to-pink-600/20 transition-all duration-500" style="width: ${percent}%"></div>
-                            <div class="relative z-10 flex items-center gap-2">
-                                <span class="text-xs md:text-sm font-medium text-purple-100 group-hover:text-white">${cleanOpt}</span>
-                            </div>
-                            <div class="relative z-10 flex items-center gap-2">
-                                <span class="text-xs font-bold text-purple-300">${percent}%</span>
-                                <span class="text-[10px] text-purple-400/60 font-mono">(${count})</span>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                card.innerHTML = `
-                    <div class="flex justify-between items-center mb-3 pb-2 border-b border-purple-900/30">
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center font-bold text-white text-xs">
-                                ${name.charAt(0)}
-                            </div>
-                            <span class="text-base font-bold text-white">${name}</span>
-                        </div>
-                        <span class="text-xs bg-purple-950 text-purple-300 px-2.5 py-1 rounded-full border border-purple-800/40 font-mono">
-                            أصوات: ${totalPersonVotes}
-                        </span>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">${optionsHTML}</div>
-                `;
-                container.appendChild(card);
+        list.forEach((name) => {
+            let totalPersonVotes = 0;
+            options.forEach(opt => {
+                const key = `${name}_${opt}`;
+                totalPersonVotes += (votesData[key] || 0);
             });
-        }
 
-        function refreshUI() {
-            renderList(girlsList, girlsOptions, 'girlsSection');
-            renderList(boysList, boysOptions, 'boysSection');
-            renderLeaderboard();
-            renderAdminLogs();
-            calculateTotalVotes();
-        }
+            const card = document.createElement('div');
+            card.className = "person-card";
+            card.setAttribute('data-name', name);
 
-        function calculateTotalVotes() {
-            let sum = 0;
-            for (let k in votesData) sum += votesData[k];
-            const elem = document.getElementById('totalVotesCount');
-            if (elem) elem.innerText = sum;
-        }
+            let optionsHTML = '';
+            options.forEach(opt => {
+                const key = `${name}_${opt}`;
+                const count = votesData[key] || 0;
+                const percent = totalPersonVotes > 0 ? Math.round((count / totalPersonVotes) * 100) : 0;
+                const cleanOpt = opt.replace(/^\d+\//, '').trim();
 
-        function renderLeaderboard() {
-            const container = document.getElementById('leaderboardContent');
-            if (!container) return;
-            const items = [];
+                optionsHTML += `
+                    <div class="option-item" onclick="castVote('${name}', '${opt}')">
+                        <div class="option-progress" style="width: ${percent}%"></div>
+                        <span class="option-label">${cleanOpt}</span>
+                        <span class="option-val">${percent}% (${count})</span>
+                    </div>
+                `;
+            });
 
-            for (let key in votesData) {
-                if (votesData[key] > 0) {
-                    const parts = key.split('_');
-                    if (parts.length >= 2) {
-                        items.push({
-                            name: parts[0],
-                            option: parts.slice(1).join('_').replace(/^\d+\//, '').trim(),
-                            count: votesData[key]
-                        });
-                    }
+            card.innerHTML = `
+                <div class="person-header">
+                    <span class="person-name">${name}</span>
+                    <span class="person-rank">أصوات: ${totalPersonVotes}</span>
+                </div>
+                <div class="options-list">${optionsHTML}</div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function refreshUI() {
+        renderList(girlsList, girlsOptions, 'girlsSection');
+        renderList(boysList, boysOptions, 'boysSection');
+        renderLeaderboard();
+        renderAdminLogs();
+        calculateTotalVotes();
+    }
+
+    function calculateTotalVotes() {
+        let sum = 0;
+        for (let k in votesData) sum += votesData[k];
+        const elem = document.getElementById('totalVotesCount');
+        if (elem) elem.innerText = sum;
+    }
+
+    function renderLeaderboard() {
+        const container = document.getElementById('leaderboardContent');
+        if (!container) return;
+        const items = [];
+
+        for (let key in votesData) {
+            if (votesData[key] > 0) {
+                const parts = key.split('_');
+                if (parts.length >= 2) {
+                    items.push({
+                        name: parts[0],
+                        option: parts.slice(1).join('_').replace(/^\d+\//, '').trim(),
+                        count: votesData[key]
+                    });
                 }
             }
-
-            items.sort((a, b) => b.count - a.count);
-
-            if (items.length === 0) {
-                container.innerHTML = `<div class="bg-[#1a0b2e] rounded-2xl p-8 text-center border border-purple-800/30 text-sm text-purple-300/70">لا توجد أصوات مسجلة حتى الآن.</div>`;
-                return;
-            }
-
-            let html = '<div class="space-y-2.5">';
-            items.forEach((item, rank) => {
-                let badge = rank === 0 ? '🥇' : rank === 1 ? '🥈' : rank === 2 ? '🥉' : `#${rank + 1}`;
-                html += `
-                    <div class="bg-[#1a0b2e] border border-purple-800/30 rounded-2xl p-3.5 flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 flex items-center justify-center font-bold text-base">${badge}</div>
-                            <div>
-                                <div class="text-sm font-bold text-white">${item.name}</div>
-                                <div class="text-xs text-purple-300/80">${item.option}</div>
-                            </div>
-                        </div>
-                        <div class="bg-purple-950/80 text-amber-300 border border-purple-800/40 px-3 py-1 rounded-xl text-xs font-bold">
-                            ${item.count} أصوات
-                        </div>
-                    </div>
-                `;
-            });
-            html += '</div>';
-            container.innerHTML = html;
         }
 
-        async function castVote(name, option) {
-            const key = `${name}_${option}`;
-            const newCount = (votesData[key] || 0) + 1;
-            const timeStr = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+        items.sort((a, b) => b.count - a.count);
 
-            votesData[key] = newCount;
-            logsData.unshift({ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr });
-            
-            showToast(`تم تسجيل تصويتك لـ ${name}! 🔥`, "success");
-            refreshUI();
+        if (items.length === 0) {
+            container.innerHTML = `<div class="person-card" style="text-align:center; color:var(--text-sub);">لا توجد أصوات مسجلة حتى الآن.</div>`;
+            return;
+        }
 
+        let html = '';
+        items.forEach((item, rank) => {
+            let badge = rank === 0 ? '🥇' : rank === 1 ? '🥈' : rank === 2 ? '🥉' : `#${rank + 1}`;
+            html += `
+                <div class="lb-card">
+                    <div>
+                        <b style="color:white;">${badge} ${item.name}</b>
+                        <div style="font-size:0.8rem; color:#c084fc;">${item.option}</div>
+                    </div>
+                    <div style="color:#f472b6; font-weight:bold;">${item.count} أصوات</div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    async function castVote(name, option) {
+        const key = `${name}_${option}`;
+        const newCount = (votesData[key] || 0) + 1;
+        const timeStr = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+
+        votesData[key] = newCount;
+        logsData.unshift({ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr });
+        refreshUI();
+
+        if (_supabase) {
+            try {
+                await _supabase.from('votes').upsert({ vote_key: key, count: newCount });
+                await _supabase.from('logs').insert([{ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr }]);
+            } catch(e){}
+        }
+    }
+
+    function switchTab(tabName) {
+        document.getElementById('tab-girls').classList.remove('active');
+        document.getElementById('tab-boys').classList.remove('active');
+        document.getElementById('tab-leaderboard').classList.remove('active');
+
+        document.getElementById('girlsSection').style.display = 'none';
+        document.getElementById('boysSection').style.display = 'none';
+        document.getElementById('leaderboardSection').style.display = 'none';
+
+        if (tabName === 'girls') {
+            document.getElementById('tab-girls').classList.add('active');
+            document.getElementById('girlsSection').style.display = 'block';
+            document.getElementById('sectionTitleText').innerText = "✨ قائمة الطالبات";
+        } else if (tabName === 'boys') {
+            document.getElementById('tab-boys').classList.add('active');
+            document.getElementById('boysSection').style.display = 'block';
+            document.getElementById('sectionTitleText').innerText = "⚡ قائمة الطلاب";
+        } else if (tabName === 'leaderboard') {
+            document.getElementById('tab-leaderboard').classList.add('active');
+            document.getElementById('leaderboardSection').style.display = 'block';
+            document.getElementById('sectionTitleText').innerText = "🏆 المتصدرون في التصويت";
+        }
+    }
+
+    function filterNames() {
+        const query = document.getElementById('searchInput').value.toLowerCase().trim();
+        document.querySelectorAll('.person-card').forEach(card => {
+            const name = card.getAttribute('data-name').toLowerCase();
+            card.style.display = name.includes(query) ? 'block' : 'none';
+        });
+    }
+
+    let clickCount = 0;
+    document.getElementById('adminLockIcon').addEventListener('click', () => {
+        clickCount++;
+        if (clickCount === 3) {
+            const pass = prompt("أدخل كلمة سر الأدمن:");
+            if (pass === "9014994") {
+                document.getElementById('adminSection').style.display = 'block';
+            }
+            clickCount = 0;
+        }
+        setTimeout(() => { clickCount = 0; }, 1500);
+    });
+
+    function renderAdminLogs() {
+        const tbody = document.querySelector('#votesTable tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        logsData.slice(0, 50).forEach(log => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${log.name}</td><td>${log.option}</td><td>${log.time}</td>`;
+            tbody.appendChild(tr);
+        });
+    }
+
+    async function resetAllData() {
+        if (confirm("هل أنت تأكد من مسح جميع الأصوات؟")) {
             if (_supabase) {
                 try {
-                    await _supabase.from('votes').upsert({ vote_key: key, count: newCount });
-                    await _supabase.from('logs').insert([{ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr }]);
+                    await _supabase.from('votes').delete().neq('count', -1);
+                    await _supabase.from('logs').delete().neq('id', -1);
                 } catch(e){}
             }
+            votesData = {}; logsData = [];
+            refreshUI();
         }
+    }
 
-        function switchTab(tabName) {
-            ['girls', 'boys', 'leaderboard'].forEach(tab => {
-                const btn = document.getElementById(`tab-${tab}`);
-                const sec = document.getElementById(`${tab}Section`);
-                if (tab === tabName) {
-                    btn.className = "flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg";
-                    sec.classList.remove('hidden');
-                } else {
-                    btn.className = "flex-1 py-3 px-2 rounded-xl text-xs md:text-sm font-bold text-purple-300 hover:text-white transition-all flex items-center justify-center gap-2";
-                    sec.classList.add('hidden');
-                }
-            });
+    // التنفيذ الفوري عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('boysCount').innerText = boysList.length;
+        document.getElementById('girlsCount').innerText = girlsList.length;
+        
+        // رسم البطاقات فوراً وبدون انتظار
+        refreshUI();
 
-            const titleText = document.getElementById('sectionTitleText');
-            if (tabName === 'girls') titleText.innerHTML = `<span>✨</span> قائمة الطالبات`;
-            else if (tabName === 'boys') titleText.innerHTML = `<span>⚡</span> قائمة الطلاب`;
-            else if (tabName === 'leaderboard') titleText.innerHTML = `<span>🏆</span> قائمة الأكثر تفاعلاً والتصدر`;
-        }
-
-        function filterNames() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            document.querySelectorAll('.person-card').forEach(card => {
-                const name = card.getAttribute('data-name').toLowerCase();
-                card.style.display = name.includes(query) ? 'block' : 'none';
-            });
-        }
-
-        function clearSearchInput() {
-            document.getElementById('searchInput').value = '';
-            filterNames();
-        }
-
-        function showToast(message, type = "info") {
-            const container = document.getElementById('toastContainer');
-            if (!container) return;
-            const toast = document.createElement('div');
-            toast.className = `p-3.5 rounded-2xl border bg-purple-900 border-purple-500 text-white shadow-2xl text-xs font-medium flex items-center justify
+        // تفعيل الاتصال بـ Supaba
