@@ -13,8 +13,6 @@
             --purple-header: #2e1847;
             --purple-card: #1a0b2e;
             --purple-btn: #6b21a8;
-            --purple-accent: #a855f7;
-            --pink-accent: #ec4899;
             --text-main: #ffffff;
             --text-sub: #b3a1c9;
         }
@@ -33,7 +31,6 @@
             padding-bottom: 40px;
         }
 
-        /* Header Style */
         .hero-header {
             background: linear-gradient(180deg, #2a1145 0%, #1a0b2e 100%);
             color: white;
@@ -579,12 +576,16 @@
         }
     }
 
-    // التنفيذ الفوري عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('boysCount').innerText = boysList.length;
-        document.getElementById('girlsCount').innerText = girlsList.length;
-        
-        // رسم البطاقات فوراً وبدون انتظار
-        refreshUI();
+    // 🚀 التنفيذ الفوري المستقل
+    document.getElementById('boysCount').innerText = boysList.length;
+    document.getElementById('girlsCount').innerText = girlsList.length;
+    
+    // رسم البطاقات فوراً قبل الاتصال بالشبكة
+    refreshUI();
 
-        // تفعيل الاتصال بـ Supaba
+    // تشغيل الاتصال بالسيرفر في الخلفية
+    window.onload = function() {
+        try {
+            if (window.supabase) {
+                _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+     
