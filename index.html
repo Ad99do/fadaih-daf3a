@@ -43,11 +43,6 @@
         .animate-pulse-subtle {
             animation: pulse-subtle 3s infinite ease-in-out;
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
         .glass-card-light {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -94,7 +89,6 @@
             </p>
         </div>
 
-        <!-- Floating Particles Effect -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
             <div class="absolute top-10 right-10 w-32 h-32 bg-purple-500 rounded-full blur-3xl"></div>
             <div class="absolute bottom-5 left-10 w-40 h-40 bg-pink-500 rounded-full blur-3xl"></div>
@@ -209,12 +203,10 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // Supabase Cloud Configuration
         const SUPABASE_URL = "https://kstnagfousuiwbnikkwi.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_7xQHPTjLP82fhRQjVY1vfw_nHGBbKKt";
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Options Data
         const boysOptions = [
             "1/ الحفار الخسيس 🎓", "2/ بتاع الونسه 🫥", "3/ الخسيس 😐", 
             "4/ نجم الدفعة ♦️", "5/ اجتماعي ❤️", "6/ مبتعد عن الدفعة 😬", 
@@ -230,15 +222,12 @@
             "10/ أم لساان طويل 👅", "11/ البتنوم في المحاضره 😴", "12/ الخفيفه الرشيقه ⚡"
         ];
 
-        // Lists
         const boysList = ["منذر", "ايمن", "مجتبى سليمان", "ماهر خالد", "محمد عثمان جاد الله", "محمد حسن", "احمد البشير", "احمد سامي", "حسام المكنه", "محمد عاطف", "اواب", "محمد خالد", "الجيلى", "التجاني", "المثنى مزمل", "عبدالله", "نزار", "أمجد", "عبدالرحيم", "محمد خوجلي", "عبدالرحمن رضوان", "المقداد صلاح", "محمد", "ادم تصرف ساي", "وائل", "مبارك خليل", "عبدالله عبد الله", "الطيب كمال الطيب", "عاصم"];
         const girlsList = ["وعد أمين", "مأب", "نفيسه", "رغده", "مروه", "شهد", "قمر", "رهام", "ساجده", "سبأ", "ريان", "ترتيل", "دعاء", "دلال", "دعاء 2", "سارة", "امنية", "زينب", "ابرار", "ضحى", "مأب التانيه", "شهد محمد", "وعد عامر", "عناب"];
 
-        // State Management
         let votesData = {};
         let logsData = [];
 
-        // Fetch Live Data from Supabase
         async function loadData() {
             try {
                 const { data: votes } = await _supabase.from('votes').select('*');
@@ -254,7 +243,6 @@
             refreshUI();
         }
 
-        // Realtime Subscription
         _supabase.channel('public:votes')
           .on('postgres_changes', { event: '*', schema: 'public', table: 'votes' }, payload => {
               if (payload.new) {
@@ -263,14 +251,13 @@
               }
           }).subscribe();
 
-        // On DOM Load Init
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('boysCount').innerText = boysList.length;
             document.getElementById('girlsCount').innerText = girlsList.length;
+            refreshUI();
             loadData();
         });
 
-        // Switch Active Tab
         function switchTab(tabName) {
             const tabs = ['girls', 'boys', 'leaderboard'];
             tabs.forEach(tab => {
@@ -294,9 +281,9 @@
             }
         }
 
-        // Render List Card Items
         function renderList(list, options, containerId) {
             const container = document.getElementById(containerId);
+            if (!container) return;
             container.innerHTML = '';
 
             list.forEach((name, index) => {
@@ -320,7 +307,6 @@
                     optionsHTML += `
                         <div onclick="castVote('${name}', '${opt}')" 
                              class="group relative overflow-hidden bg-[#24103c] hover:bg-[#2e154d] border border-purple-900/40 rounded-xl p-3 flex justify-between items-center cursor-pointer transition-all active:scale-[0.99]">
-                            <!-- Progress Bar Background -->
                             <div class="absolute right-0 top-0 bottom-0 bg-gradient-to-l from-purple-600/30 to-pink-600/20 transition-all duration-500" style="width: ${percent}%"></div>
                             
                             <div class="relative z-10 flex items-center gap-2">
@@ -357,7 +343,6 @@
             });
         }
 
-        // Live Vote Action to Supabase
         async function castVote(name, option) {
             const key = `${name}_${option}`;
             const newCount = (votesData[key] || 0) + 1;
@@ -375,4 +360,19 @@
 
             try {
                 await _supabase.from('votes').upsert({ vote_key: key, count: newCount });
-                await _supabase
+                await _supabase.from('logs').insert([{ name: name, option: option.replace(/^\d+\//, '').trim(), time: timeStr }]);
+            } catch(e) {
+                console.error("Supabase write error", e);
+            }
+        }
+
+        function refreshUI() {
+            renderList(girlsList, girlsOptions, 'girlsSection');
+            renderList(boysList, boysOptions, 'boysSection');
+            renderLeaderboard();
+            renderAdminLogs();
+            calculateTotalVotes();
+        }
+
+        function calculateTotalVotes() {
+            let sum 
