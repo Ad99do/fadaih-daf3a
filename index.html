@@ -3,94 +3,145 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>يلا نشوف الفضايح 🤣</title>
+<title>جدار الاعترافات 🤫</title>
 <style>
-:root{--bg:#0b1020;--panel:#141a33;--panel2:#1c2444;--line:rgba(255,255,255,.08);--txt:#f4f6ff;--sub:#98a2c9;--a:#7c5cff;--b:#ff5c9d;--gold:#ffc857}
+:root{--bg:#0b1020;--panel:#141a33;--panel2:#1c2444;--line:rgba(255,255,255,.08);--txt:#f4f6ff;--sub:#98a2c9;--a:#7c5cff;--b:#ff5c9d;--gold:#ffc857;--red:#ef4444}
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--txt);min-height:100vh;padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
-header{padding:calc(18px + env(safe-area-inset-top,0px)) 16px 22px;text-align:center;background:radial-gradient(120% 100% at 50% 0,#2b2170 0,var(--bg) 70%)}
+header{padding:calc(18px + env(safe-area-inset-top,0px)) 16px 20px;text-align:center;background:radial-gradient(120% 100% at 50% 0,#2b2170 0,var(--bg) 70%)}
 .row{display:flex;justify-content:space-between;align-items:center}
 .tag{font-size:.8rem;color:#d9d2ff;background:rgba(124,92,255,.22);border:1px solid rgba(124,92,255,.4);padding:5px 14px;border-radius:99px}
 #lock{font-size:1.3rem;padding:6px 10px;cursor:pointer}
-h1{font-size:2rem;font-weight:900;margin:16px 0 6px;background:linear-gradient(90deg,#fff,var(--b),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+h1{font-size:2rem;font-weight:900;margin:14px 0 6px;background:linear-gradient(90deg,#fff,var(--b),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .sub{font-size:.85rem;color:var(--sub)}
-.chips{display:flex;gap:8px;justify-content:center;margin-top:16px}
-.chip{flex:1;max-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:10px 4px}
-.chip b{display:block;font-size:1.3rem}
-.chip span{font-size:.72rem;color:var(--sub)}
 main{max-width:520px;margin:0 auto;padding:0 14px}
-#search{width:100%;padding:13px 16px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--txt);font-size:.95rem;outline:none;margin:6px 0 14px}
-#search:focus{border-color:var(--a)}
-.sec{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px}
-.sec h2{font-size:1.05rem}
-.hint{font-size:.72rem;color:var(--sub)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;margin-bottom:10px;overflow:hidden}
-.ch{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer}
-.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:1.1rem;background:linear-gradient(135deg,var(--a),var(--b));flex:none}
-.boys .av{background:linear-gradient(135deg,#3b82f6,var(--a))}
-.info{flex:1;min-width:0}
-.nm{font-weight:800;font-size:1.02rem}
-.top{font-size:.75rem;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.top.none{color:var(--sub)}
-.cnt{font-size:.75rem;background:var(--panel2);color:var(--sub);padding:4px 10px;border-radius:99px}
-.arrow{color:var(--sub);transition:transform .2s}
-.card.open .arrow{transform:rotate(180deg)}
-.opts{display:none;padding:0 12px 12px;gap:7px;grid-template-columns:1fr}
-.card.open .opts{display:grid}
-.opt{position:relative;overflow:hidden;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:11px 13px;display:flex;justify-content:space-between;cursor:pointer;user-select:none}
-.opt.mine{border-color:var(--b)}
-.bar{position:absolute;inset:0 0 0 auto;background:linear-gradient(270deg,rgba(124,92,255,.45),rgba(255,92,157,.25));transition:width .4s}
-.opt span{position:relative;font-size:.88rem}
-.opt .v{font-weight:800;color:var(--b)}
-.lb{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:8px}
-.rk{font-size:1.2rem;min-width:34px;text-align:center}
-.lb .t{flex:1}
-.lb .t small{display:block;color:var(--sub);font-size:.8rem;margin-top:2px}
-.lb .n{font-weight:900;color:var(--gold)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:12px}
+.lbl{font-size:.8rem;color:var(--sub);margin:12px 0 6px;display:block}
+.lbl:first-child{margin-top:0}
+.seg{display:flex;gap:6px;background:var(--panel2);padding:4px;border-radius:14px}
+.seg button{flex:1;border:none;background:transparent;color:var(--sub);padding:10px 4px;border-radius:11px;font-weight:700;font-size:.83rem;cursor:pointer}
+.seg button.on{background:linear-gradient(90deg,var(--a),var(--b));color:#fff}
+select,textarea,input{width:100%;background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:.95rem;outline:none}
+select:focus,textarea:focus,input:focus{border-color:var(--a)}
+textarea{min-height:110px;resize:vertical;line-height:1.6}
+.cnt{font-size:.72rem;color:var(--sub);text-align:left;margin-top:4px}
+.btn{width:100%;border:none;background:linear-gradient(90deg,var(--a),var(--b));color:#fff;font-weight:900;font-size:1rem;padding:13px;border-radius:14px;cursor:pointer;margin-top:12px}
+.btn:disabled{opacity:.5}
+.btn.ghost{background:var(--panel2);color:var(--sub);font-weight:700}
+.note{font-size:.74rem;color:var(--sub);margin-top:10px;line-height:1.7}
+.hintv{font-size:.76rem;color:var(--gold);margin-top:6px;line-height:1.6}
+.chips{display:flex;gap:6px;margin:4px 0 10px;overflow-x:auto}
+.chip{flex:none;border:1px solid var(--line);background:var(--panel);color:var(--sub);padding:7px 14px;border-radius:99px;font-size:.8rem;font-weight:700;cursor:pointer}
+.chip.on{background:var(--a);color:#fff;border-color:var(--a)}
+.post{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:10px}
+.post.hid{opacity:.55;border-color:rgba(239,68,68,.5)}
+.ph{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:1.1rem;font-weight:900;background:var(--panel2);flex:none}
+.av.me{background:linear-gradient(135deg,var(--a),var(--b))}
+.who{flex:1;min-width:0}
+.who b{display:block;font-size:.92rem}
+.who small{color:var(--gold);font-size:.78rem}
+.body{white-space:pre-wrap;word-break:break-word;line-height:1.7;font-size:.97rem}
+.pf{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:.74rem;color:var(--sub);gap:6px;flex-wrap:wrap}
+.pf button{border:none;background:var(--panel2);color:var(--sub);padding:6px 11px;border-radius:99px;font-size:.76rem;cursor:pointer;margin-inline-start:5px}
+.pf button.ok{color:#4ade80}.pf button.no{color:#f87171}
+.flag{display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:99px;background:rgba(239,68,68,.18);color:#fca5a5;margin-inline-end:4px}
+.flag.g{background:rgba(255,200,87,.15);color:var(--gold)}
 .empty{text-align:center;color:var(--sub);padding:30px 10px}
 nav{position:fixed;bottom:0;inset-inline:0;display:flex;gap:6px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));background:rgba(11,16,32,.92);backdrop-filter:blur(10px);border-top:1px solid var(--line);z-index:20}
-.tab{flex:1;border:none;background:transparent;color:var(--sub);padding:10px 4px;border-radius:14px;font-weight:700;font-size:.85rem;cursor:pointer}
+.tab{flex:1;border:none;background:transparent;color:var(--sub);padding:11px 2px;border-radius:14px;font-weight:700;font-size:.85rem;cursor:pointer}
 .tab.on{background:linear-gradient(90deg,var(--a),var(--b));color:#fff}
-#admin{display:none;margin-top:20px;background:#1d0f1c;border:1px solid #ef4444;border-radius:16px;padding:16px}
-#admin button{background:#dc2626;color:#fff;border:none;padding:9px 14px;border-radius:10px;font-weight:800;margin:10px 0;cursor:pointer}
-.tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse}
-th,td{border:1px solid var(--line);padding:7px;text-align:right;font-size:.82rem}
-th{background:var(--panel2);color:var(--b)}
-#toast{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--a);color:#fff;padding:10px 18px;border-radius:12px;font-size:.88rem;opacity:0;pointer-events:none;transition:opacity .3s;z-index:30}
+#toast{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--a);color:#fff;padding:10px 18px;border-radius:12px;font-size:.88rem;opacity:0;pointer-events:none;transition:opacity .3s;z-index:200;max-width:92%;text-align:center;line-height:1.6}
 #toast.show{opacity:1}
+.adminhead{background:#1d0f1c;border:1px solid var(--red);border-radius:14px;padding:12px 14px;margin-bottom:12px;color:#fca5a5;font-size:.85rem;display:flex;justify-content:space-between;align-items:center}
+.adminhead button{background:var(--red);color:#fff;border:none;border-radius:10px;padding:6px 12px;font-weight:700;cursor:pointer}
+#gate{position:fixed;inset:0;z-index:100;background:radial-gradient(120% 100% at 50% 0,#2b2170 0,var(--bg) 70%);display:flex;align-items:center;justify-content:center;padding:20px;overflow:auto}
+.gbox{width:100%;max-width:420px;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px;text-align:center}
+.gbox .lbl{text-align:right}
 </style>
 </head>
 <body>
-<header>
-  <div class="row"><span class="tag">دفعتنا تحت المجهر 🔍</span><span><span>♦️ 🤣</span><span id="lock">🔒</span></span></div>
-  <h1>يلا نشوف الفضايح 🤣</h1>
-  <p class="sub">اختار التصنيف وشوف النسبة فوراً.. وتقدر تصوّت لأكثر من صفة!</p>
-  <div class="chips">
-    <div class="chip"><b id="sTotal">0</b><span>تصويت مسجل</span></div>
-    <div class="chip"><b id="sGirls">0</b><span>طالبة 👩</span></div>
-    <div class="chip"><b id="sBoys">0</b><span>طالب 👦</span></div>
+<div id="gate">
+  <div class="gbox">
+    <h1>جدار الاعترافات 🤫</h1>
+    <p class="sub">دخول الدفعة فقط. اختار اسمك وادخل رمزك السري.</p>
+    <span class="lbl">اسمك</span><select id="myName"></select>
+    <span class="lbl">رمزك السري</span><input id="myPin" type="password" inputmode="numeric" placeholder="الرمز اللي استلمته من الأدمن">
+    <button class="btn" id="openBox">دخول 🚪</button>
+    <p class="note">ما عندك رمز؟ اطلبه من الأدمن.</p>
   </div>
+</div>
+<header>
+  <div class="row"><span class="tag">دفعتنا 🤫</span><span id="lock">🔒</span></div>
+  <h1>جدار الاعترافات 🤫</h1>
+  <p class="sub">رسالة لزول، اعتراف، أو كلمة من القلب.. مجهول أو بإسمك</p>
 </header>
 
 <main>
-  <input id="search" type="search" placeholder="ابحث عن اسم بالدفعة...">
-  <div class="sec"><h2 id="secT">✨ قائمة الطالبات</h2><span class="hint" id="secH">اضغط على الاسم ثم اختر الصفة</span></div>
-  <div id="girls"></div>
-  <div id="boys" class="boys" style="display:none"></div>
-  <div id="lbox" style="display:none"></div>
+  <!-- كتابة -->
+  <section id="writeV">
+    <div class="box">
+      <span class="lbl">شنو عايز تكتب؟</span>
+      <div class="seg" id="kindSeg"><button class="on" data-k="message">💬 رسالة لشخص</button><button data-k="confession">🤫 اعتراف</button></div>
 
-  <div id="admin">
-    <h3 style="color:#f87171">🔒 لوحة الأدمن</h3>
-    <button id="reset">تصفير جميع الأصوات ⚠️</button>
-    <div class="tw"><table><thead><tr><th>المُصوَّت عليه</th><th>الصفة</th><th>الوقت</th></tr></thead><tbody id="logs"></tbody></table></div>
-  </div>
+      <span class="lbl" id="toLbl">لمن؟</span>
+      <select id="to"></select>
+
+      <div id="visWrap">
+        <span class="lbl">وين تظهر؟</span>
+        <div class="seg" id="visSeg"><button class="on" data-v="private">🔒 خاصة (صندوقه بس)</button><button data-v="public">🌍 عامة (الجدار)</button></div>
+        <p class="hintv" id="visHint"></p>
+      </div>
+
+      <span class="lbl">بإسم منو؟</span>
+      <div class="seg" id="idSeg"><button class="on" data-i="anon">🕶️ مجهول</button><button data-i="reveal">🙋 أكشف نفسي</button></div>
+      <div id="fromWrap" style="display:none"><p class="hintv" id="fromName"></p></div>
+
+      <span class="lbl">رسالتك</span>
+      <textarea id="txt" maxlength="500" placeholder="اكتب هنا بكل أحترام..."></textarea>
+      <div class="cnt"><span id="n">0</span> / 500</div>
+      <button class="btn" id="sendBtn">إرسال 🚀</button>
+      <p class="note">⚠️ "مجهول" معناها إن اسمك ما بيظهر لباقي الدفعة، في حالات الإساءة والتنمر. الإساءة ممنوعة، والرسايل بتتفحص تلقائياً، والمخالفة بتتحجب وتتراجع من النظام.</p>
+    </div>
+  </section>
+
+  <!-- الجدار -->
+  <section id="wallV" style="display:none">
+    <input id="q" type="search" placeholder="ابحث باسم شخص...">
+    <div class="chips" id="chips">
+      <button class="chip on" data-f="all">الكل</button>
+      <button class="chip" data-f="confession">🤫 اعترافات</button>
+      <button class="chip" data-f="message">💬 رسايل</button>
+      <button class="chip" data-f="revealed">🙋 بإسم صاحبها</button>
+    </div>
+    <div id="feed"></div>
+  </section>
+
+  <!-- الصندوق الخاص -->
+  <section id="boxV" style="display:none">
+    <div id="inbox" style="display:none">
+      <div class="adminhead" style="background:var(--panel);border-color:var(--line);color:var(--txt)"><span id="hi"></span><button id="out" style="background:var(--panel2);color:var(--sub)">خروج</button></div>
+      <div id="inList"></div>
+    </div>
+  </section>
+
+  <!-- الأدمن -->
+  <section id="adminV" style="display:none">
+    <div class="adminhead"><span>🔒 لوحة الأدمن</span><button id="aOut">خروج</button></div>
+    <input id="aq" type="search" placeholder="ابحث باسم الراسل أو المستلم..." style="margin-bottom:10px">
+    <div class="chips" id="aChips">
+      <button class="chip on" data-m="review">🚩 للمراجعة</button>
+      <button class="chip" data-m="all">📚 كل الرسايل</button>
+      <button class="chip" data-m="public">🌍 العامة</button>
+    </div>
+    <div id="aList"></div>
+  </section>
 </main>
 
 <nav>
-  <button class="tab on" data-t="girls">👩 البنات</button>
-  <button class="tab" data-t="boys">👦 الأولاد</button>
-  <button class="tab" data-t="lbox">🏆 المتصدرون</button>
+  <button class="tab on" data-v="writeV">✍️ اكتب</button>
+  <button class="tab" data-v="wallV">📜 الجدار</button>
+  <button class="tab" data-v="boxV">📥 صندوقي</button>
 </nav>
 <div id="toast"></div>
 
@@ -98,28 +149,19 @@ th{background:var(--panel2);color:var(--b)}
 (function(){
 const URL_ = "https://kstnagfousuiwbnikkwi.supabase.co";
 const KEY = "sb_publishable_7xQHPTjLP82fhRQjVY1vfw_nHGBbKKt";
-const PASS = "9014994";
 
-const G = {
-  girls:{
-    list:["وعد أمين","مأب محمد","نفيسه","رغده","مروه","شهد","قمر","رهام","ساجده","سبأ","ريان","ترتيل","دعاء","دلال","دعاء 2","سارة","امنية","زينب","ابرار","ضحى","مأب عصام","شهد محمد","أسيل","وعد عامر","عناب"],
-    opts:["1/ إجتماعيه ✨","2/ الحفارة 🎓","3/ السواطة 🤣","4/ القطيعه 🤣","5/ المهذبه ❣️","6/ البعيده عن الدفعه 😐","7/ نجمة الدفعة ♦️","8/ العايشه الدور 🤣","9/ الخسيسه 😶","10/ أم لساان طويل 👅","11/ البتنوم في المحاضره 😴","12/ الخفيفه الرشيقه ⚡"]
-  },
-  boys:{
-    list:["منذر","ايمن","مجتبى سليمان","ماهر خالد","محمد عثمان جاد الله","محمد حسن","احمد البشير","احمد سامي","حسام المكنه","محمد عاطف","اواب","محمد خالد","الجيلى","التجاني","المثنى مزمل","عبدالله","نزار","أمجد","عبدالرحيم","محمد خوجلي","عبدالرحمن رضوان","المقداد صلاح","محمد","ادم تصرف ساي","وائل","مبارك خليل","عبدالله عبد الله","الطيب كمال الطيب","عاصم"],
-    opts:["1/ الحفار الخسيس 🎓","2/ بتاع الونسه 🫥","3/ الخسيس 😐","4/ نجم الدفعة ♦️","5/ اجتماعي ❤️","6/ مبتعد عن الدفعة 😬","7/ ملك التصرف الساي 🤣","8/ المهذب ❣️","9/ الطقه والقهوة 🥴","10/ الموهوم 😶","11/ البساعد الناس 🤍","12/ صاحب الضحكه المميزه 🤣🌝","13/ الخفيف الرشيق ⚡"]
-  }
-};
+const girls = ["وعد أمين","مأب","نفيسه","رغده","مروه","شهد","قمر","رهام","ساجده","سبأ","ريان","ترتيل","دعاء","دلال","دعاء 2","سارة","امنية","زينب","ابرار","ضحى","مأب التانيه","شهد محمد","وعد عامر","عناب"];
+const boys = ["منذر","ايمن","مجتبى سليمان","ماهر خالد","محمد عثمان جاد الله","محمد حسن","احمد البشير","احمد سامي","حسام المكنه","محمد عاطف","اواب","محمد خالد","الجيلى","التجاني","المثنى مزمل","عبدالله","نزار","أمجد","عبدالرحيم","محمد خوجلي","عبدالرحمن رضوان","المقداد صلاح","محمد","ادم تصرف ساي","وائل","مبارك خليل","عبدالله عبد الله","الطيب كمال الطيب","عاصم"];
 
-let votes = {}, mine = new Set(), openKey = null, tab = 'girls';
-try { mine = new Set(JSON.parse(localStorage.getItem('mine2') || '[]')); } catch(e){}
-const save = () => { try { localStorage.setItem('mine2', JSON.stringify([...mine])); } catch(e){} };
+/* قائمة الكلمات الممنوعة (تتطابق مع الموجودة في قاعدة البيانات) */
+const BAD = ["كلب","كلبة","حمار","حمارة","غبي","غبية","حقير","حقيرة","قذر","قذرة","وسخ","وسخة","زباله","منحط","منحطة","خنزير","عاهر","شرموط","قحبة","ابن الكلب","ابن الحرام","ولد الحرام","يلعن","اخرس","اخرسي","انتحر","انتحري","اقتل نفسك","اقتلك","ديوث","خول","منيوك","فاشل","فاشلة","تافه","بتاع بنات","تافهة"];
+const norm = s => s.toLowerCase().replace(/[\u064B-\u065F\u0670\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/(.)\1+/g,'$1');
+const BADN = BAD.map(norm);
+function isBad(t){ const a = norm(t), b = a.replace(/[^a-z\u0621-\u064a]/g,''); return BADN.some(w => a.includes(w) || b.includes(w.replace(/ /g,''))); }
+
 const $ = id => document.getElementById(id);
-const clean = s => s.replace(/^\d+\//,'').trim();
-const kk = (n,o) => n + '_' + o;
-const mk = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
-
-function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove('show'),2200); }
+const mk = (t,c,x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
+function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove('show'),3200); }
 
 async function sb(path, o){
   o = o || {};
@@ -131,133 +173,181 @@ async function sb(path, o){
   if (!r.ok) throw new Error(r.status);
   const t = await r.text(); return t ? JSON.parse(t) : null;
 }
+const rpc = (name, args) => sb('rpc/' + name, {method:'POST', body: args || {}});
 
-async function pull(){
+function ago(iso){
+  const s = Math.max(0,(Date.now() - new Date(iso).getTime())/1000);
+  if (s < 60) return 'هسه';
+  if (s < 3600) return 'قبل ' + Math.floor(s/60) + ' دقيقة';
+  if (s < 86400) return 'قبل ' + Math.floor(s/3600) + ' ساعة';
+  return 'قبل ' + Math.floor(s/86400) + ' يوم';
+}
+
+/* ---------- قوائم الأسماء ---------- */
+function fillSelect(sel, first){
+  sel.textContent = '';
+  const o0 = mk('option','',first); o0.value = ''; sel.appendChild(o0);
+  [['👩 البنات',girls],['👦 الأولاد',boys]].forEach(g => {
+    const og = document.createElement('optgroup'); og.label = g[0];
+    g[1].forEach(n => { const o = mk('option','',n); o.value = n; og.appendChild(o); });
+    sel.appendChild(og);
+  });
+}
+fillSelect($('to'),'اختار الاسم...'); fillSelect($('myName'),'اختار اسمك...');
+
+/* ---------- الكتابة ---------- */
+let kind = 'message', vis = 'private', ident = 'anon';
+function seg(id, attr, cb){
+  $(id).addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    $(id).querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+    cb(b.dataset[attr]);
+  });
+}
+function syncVis(){
+  const forcedPublic = kind === 'confession' && !$('to').value;
+  $('visWrap').style.display = forcedPublic ? 'none' : 'block';
+  if (forcedPublic) vis = 'public';
+  else if (!$('visSeg').querySelector('.on')) vis = 'private';
+  $('visHint').textContent = vis === 'private'
+    ? '🔒 بتوصل لصندوقه الخاص وهو بس يشوفها.'
+    : '🌍 بتظهر في الجدار وكل الدفعة تشوفها.';
+}
+function resetVisSeg(){
+  vis = 'private';
+  $('visSeg').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.v === 'private'));
+}
+seg('kindSeg','k', v => { kind = v; $('toLbl').textContent = v === 'confession' ? 'موجه لشخص؟ (اختياري)' : 'لمن؟'; $('to').firstChild.textContent = v === 'confession' ? 'بدون شخص (اعتراف عام)' : 'اختار الاسم...'; resetVisSeg(); syncVis(); });
+seg('visSeg','v', v => { vis = v; syncVis(); });
+seg('idSeg','i', v => { ident = v; $('fromWrap').style.display = v === 'reveal' ? 'block' : 'none'; });
+$('to').addEventListener('change', () => { resetVisSeg(); syncVis(); });
+$('txt').addEventListener('input', () => $('n').textContent = $('txt').value.length);
+syncVis();
+
+$('sendBtn').addEventListener('click', async () => {
+  const body = $('txt').value.trim(), to = $('to').value, from = me ? me.name : '';
+  if (!body){ toast('اكتب رسالتك أول ✍️'); return; }
+  if (kind === 'message' && !to){ toast('اختار الشخص اللي عايز ترسل له'); return; }
+  if (ident === 'reveal' && !from){ toast('اختار اسمك أو خليك مجهول'); return; }
+  if (isBad(body)){ toast('رسالتك فيها كلام ممكن يجرح 💔 غيّر الصياغة وجرّب تاني. الكلام الطيب بيوصل أحسن!'); return; }
+  const last = +localStorage.getItem('lastSend') || 0;
+  if (Date.now() - last < 20000){ toast('استنى شوية قبل الرسالة الجاية ⏳'); return; }
+
+  $('sendBtn').disabled = true;
   try {
-    const d = await sb('votes?select=*'), f = {};
-    (d || []).forEach(v => f[v.vote_key] = v.count);
-    if (JSON.stringify(f) !== JSON.stringify(votes)){ votes = f; draw(); }
+    const finalVis = (kind === 'confession' && !to) ? 'public' : vis;
+    await rpc('send_message', {p_name: me.name, p_pin: me.pin, p_kind: kind, p_vis: finalVis, p_to: to || '', p_reveal: ident === 'reveal', p_body: body});
+    try { localStorage.setItem('lastSend', Date.now()); } catch(e){}
+    $('txt').value = ''; $('n').textContent = '0';
+    toast(finalVis === 'private' ? 'وصلت لصندوقه الخاص ✅' : 'انرسلت ✅ بتظهر في الجدار');
+  } catch(e){ toast('ما انرسلت، جرّب تاني ⚠️'); }
+  $('sendBtn').disabled = false;
+});
+
+/* ---------- الجدار ---------- */
+let wall = [], filter = 'all';
+let reported = new Set();
+try { reported = new Set(JSON.parse(localStorage.getItem('rep4') || '[]')); } catch(e){}
+
+async function pullWall(){
+  try {
+    wall = (await sb('messages?select=id,kind,to_name,from_name,body,created_at&visibility=eq.public&hidden=eq.false&order=id.desc&limit=80')) || [];
+    drawWall();
   } catch(e){}
 }
-
-function card(gid, name){
-  const g = G[gid], ck = gid + ':' + name;
-  const counts = g.opts.map(o => votes[kk(name,o)] || 0);
-  const total = counts.reduce((a,b)=>a+b,0);
-  const mx = Math.max.apply(null, counts), ti = counts.indexOf(mx);
-
-  const c = mk('div', 'card' + (openKey === ck ? ' open' : ''));
-  c.dataset.name = name; c.dataset.ck = ck;
-
-  const h = mk('div','ch');
-  const av = mk('div','av', name.trim().charAt(0));
-  const info = mk('div','info');
-  info.append(mk('div','nm',name), mk('div','top' + (mx ? '' : ' none'), mx ? '🔥 ' + clean(g.opts[ti]) + ' (' + mx + ')' : 'ما في أصوات بعد'));
-  h.append(av, info, mk('span','cnt', total + ' صوت'), mk('span','arrow','▾'));
-  h.addEventListener('click', () => { openKey = openKey === ck ? null : ck; draw(); });
-
-  const ol = mk('div','opts');
-  g.opts.forEach((o,i) => {
-    const pct = total ? Math.round(counts[i]/total*100) : 0;
-    const el = mk('div','opt' + (mine.has(kk(name,o)) ? ' mine' : ''));
-    const bar = mk('div','bar'); bar.style.width = pct + '%';
-    el.append(bar, mk('span','',clean(o)), mk('span','v', pct + '% (' + counts[i] + ')'));
-    el.addEventListener('click', () => vote(gid, name, i));
-    ol.appendChild(el);
+function drawWall(){
+  const box = $('feed'); box.textContent = '';
+  const q = $('q').value.toLowerCase().trim();
+  const list = wall.filter(p => {
+    if (filter === 'confession' && p.kind !== 'confession') return false;
+    if (filter === 'message' && p.kind !== 'message') return false;
+    if (filter === 'revealed' && !p.from_name) return false;
+    if (q && !((p.to_name||'') + ' ' + (p.from_name||'')).toLowerCase().includes(q)) return false;
+    return true;
   });
-  c.append(h, ol);
+  if (!list.length){ box.appendChild(mk('div','empty','ما في رسايل هنا حتى الآن.')); return; }
+  list.forEach(p => {
+    const c = card(p);
+    const f = mk('div','pf');
+    f.appendChild(mk('span','',ago(p.created_at)));
+    const rb = mk('button','', reported.has(p.id) ? 'تم الإبلاغ' : '🚩 إبلاغ');
+    rb.addEventListener('click', () => report(p.id));
+    f.appendChild(rb); c.appendChild(f); box.appendChild(c);
+  });
+}
+function card(p, extraCls){
+  const c = mk('div','post' + (extraCls || ''));
+  const h = mk('div','ph');
+  h.appendChild(mk('div','av' + (p.from_name ? ' me' : ''), p.from_name ? p.from_name.charAt(0) : '🕶️'));
+  const w = mk('div','who');
+  w.appendChild(mk('b','',p.from_name || 'مجهول'));
+  w.appendChild(mk('small','', p.kind === 'confession' ? ('🤫 اعتراف' + (p.to_name ? ' ← ' + p.to_name : '')) : ('💬 إلى: ' + (p.to_name || ''))));
+  h.appendChild(w); c.appendChild(h);
+  c.appendChild(mk('div','body',p.body));
   return c;
 }
-
-function drawLB(){
-  const items = [];
-  Object.keys(G).forEach(gid => G[gid].list.forEach(n => G[gid].opts.forEach(o => {
-    const c = votes[kk(n,o)] || 0; if (c > 0) items.push({n, o: clean(o), c});
-  })));
-  items.sort((a,b) => b.c - a.c);
-  const box = $('lbox'); box.textContent = '';
-  if (!items.length){ box.appendChild(mk('div','empty','لا توجد أصوات مسجلة حتى الآن.')); return; }
-  items.slice(0,50).forEach((it,i) => {
-    const r = mk('div','lb');
-    const t = mk('div','t'); t.append(mk('b','',it.n), mk('small','',it.o));
-    r.append(mk('div','rk', i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)), t, mk('div','n', it.c + ' أصوات'));
-    box.appendChild(r);
-  });
+async function report(id){
+  if (reported.has(id)){ toast('بلّغت عنها من قبل'); return; }
+  reported.add(id);
+  try { localStorage.setItem('rep4', JSON.stringify([...reported])); } catch(e){}
+  try { await rpc('report_message', {p_id:id}); toast('وصل بلاغك، شكراً 🙏'); pullWall(); }
+  catch(e){ toast('ما وصل البلاغ، جرّب تاني'); }
 }
+$('chips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  filter = b.dataset.f;
+  document.querySelectorAll('#chips .chip').forEach(x => x.classList.toggle('on', x === b));
+  drawWall();
+});
+$('q').addEventListener('input', drawWall);
 
-function draw(){
-  ['girls','boys'].forEach(gid => {
-    const box = $(gid); box.textContent = '';
-    G[gid].list.forEach(n => box.appendChild(card(gid, n)));
-  });
-  drawLB();
-  let s = 0; for (const k in votes) s += votes[k] || 0;
-  $('sTotal').textContent = s;
-  filter();
-}
-
-async function vote(gid, name, i){
-  const o = G[gid].opts[i], k = kk(name,o);
-  if (mine.has(k)){ toast('صوّتّ لهذه الصفة من قبل ✋'); return; }
-  votes[k] = (votes[k] || 0) + 1; mine.add(k); save(); draw(); toast('تم تسجيل صوتك ✅');
+/* ---------- الصندوق الخاص ---------- */
+let me = null; try { me = JSON.parse(localStorage.getItem('me2') || 'null'); } catch(e){}
+function enter(){ $('gate').style.display = 'none'; $('fromName').textContent = '🙋 بتظهر بإسمك: ' + me.name; loadBox(); }
+function logout(){ me = null; try { localStorage.removeItem('me2'); } catch(e){} $('gate').style.display = 'flex'; show('writeV'); }
+$('openBox').addEventListener('click', async () => {
+  const name = $('myName').value, pin = $('myPin').value.trim();
+  if (!name || !pin){ toast('اختار اسمك واكتب الرمز'); return; }
   try {
-    const cur = await sb('votes?select=count&vote_key=eq.' + encodeURIComponent(k));
-    const n = (cur && cur[0] ? cur[0].count : 0) + 1;
-    await sb('votes?on_conflict=vote_key', {method:'POST', headers:{Prefer:'resolution=merge-duplicates,return=minimal'}, body:{vote_key:k, count:n}});
-    votes[k] = n; draw();
-    const time = new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});
-    await sb('logs', {method:'POST', headers:{Prefer:'return=minimal'}, body:{name, option:clean(o), time}});
-  } catch(e){
-    votes[k] = Math.max(0,(votes[k]||1)-1); mine.delete(k); save(); draw();
-    toast('ما انحفظ الصوت، جرّب مرة ثانية ⚠️');
-  }
+    const ok = await rpc('check_pin', {p_name:name, p_pin:pin});
+    if (!ok){ toast('الاسم أو الرمز غلط ❌'); return; }
+    me = {name, pin};
+    try { localStorage.setItem('me2', JSON.stringify(me)); } catch(e){}
+    $('myPin').value = ''; enter();
+  } catch(e){ toast('تعذّر الاتصال ⚠️'); }
+});
+$('out').addEventListener('click', logout);
+
+async function loadBox(){
+  if (!me) return;
+  $('inbox').style.display = 'block';
+  $('hi').textContent = '📥 صندوق ' + me.name;
+  try {
+    const rows = (await rpc('get_inbox', {p_name:me.name, p_pin:me.pin})) || [];
+    const box = $('inList'); box.textContent = '';
+    if (!rows.length){ box.appendChild(mk('div','empty','صندوقك فاضي حتى الآن. 🕊️')); return; }
+    rows.forEach(p => {
+      const c = card(p);
+      const f = mk('div','pf');
+      const l = mk('span'); l.append(mk('span','flag g', p.visibility === 'private' ? '🔒 خاصة' : '🌍 عامة'), mk('span','', ago(p.created_at)));
+      f.appendChild(l);
+      const hb = mk('button','no','🙈 إخفاء وإبلاغ');
+      hb.addEventListener('click', async () => {
+        if (!confirm('إخفاء الرسالة وإرسالها للأدمن للمراجعة؟')) return;
+        try { await rpc('inbox_hide', {p_name:me.name, p_pin:me.pin, p_id:p.id}); toast('تم الإخفاء ✅'); loadBox(); } catch(e){ toast('فشل ⚠️'); }
+      });
+      f.appendChild(hb); c.appendChild(f); box.appendChild(c);
+    });
+  } catch(e){ toast('تعذّر تحميل الصندوق ⚠️'); }
 }
 
-const T = {girls:['✨ قائمة الطالبات','اضغط على الاسم ثم اختر الصفة'], boys:['⚡ قائمة الطلاب','اضغط على الاسم ثم اختر الصفة'], lbox:['🏆 المتصدرون','أعلى الأصوات في الدفعة']};
-document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => {
-  tab = b.dataset.t;
-  document.querySelectorAll('.tab').forEach(x => x.classList.toggle('on', x === b));
-  ['girls','boys','lbox'].forEach(id => $(id).style.display = id === tab ? 'block' : 'none');
-  $('secT').textContent = T[tab][0]; $('secH').textContent = T[tab][1];
-  $('search').style.display = tab === 'lbox' ? 'none' : 'block';
-  window.scrollTo({top:0});
-}));
-
-function filter(){
-  const q = $('search').value.toLowerCase().trim();
-  document.querySelectorAll('.card[data-name]').forEach(c => c.style.display = c.dataset.name.toLowerCase().includes(q) ? '' : 'none');
-}
-$('search').addEventListener('input', filter);
-
+/* ---------- الأدمن ---------- */
+let adminPass = null, aMode = 'review';
 let taps = 0, th;
-$('lock').addEventListener('click', () => {
+$('lock').addEventListener('click', async () => {
   taps++; clearTimeout(th); th = setTimeout(() => taps = 0, 1500);
   if (taps >= 3){
     taps = 0;
-    if (prompt('أدخل كلمة سر الأدمن:') === PASS){
-      $('admin').style.display = 'block';
-      sb('logs?select=*&order=id.desc&limit=50').then(d => {
-        const tb = $('logs'); tb.textContent = '';
-        (d || []).forEach(l => { const tr = mk('tr'); [l.name,l.option,l.time].forEach(x => tr.appendChild(mk('td','',x == null ? '' : x))); tb.appendChild(tr); });
-      }).catch(()=>{});
-      $('admin').scrollIntoView({behavior:'smooth'});
-    }
-  }
-});
-
-$('reset').addEventListener('click', async () => {
-  if (!confirm('هل أنت متأكد من مسح جميع الأصوات؟')) return;
-  try {
-    await sb('votes?count=gte.0', {method:'DELETE'});
-    await sb('logs?id=gte.0', {method:'DELETE'});
-    votes = {}; mine = new Set(); save(); draw(); $('logs').textContent = ''; toast('تم التصفير ✅');
-  } catch(e){ toast('فشل التصفير، تأكد من سياسة DELETE ⚠️'); }
-});
-
-$('sGirls').textContent = G.girls.list.length;
-$('sBoys').textContent = G.boys.list.length;
-draw(); pull(); setInterval(pull, 4000);
-})();
-</script>
-</body>
-</html>
+    const p = prompt('كلمة سر الأدمن:'); if (!p) return;
+    try { if (await rpc('admin_check', {p_pass:p})){ adminPass = p; show('adminV'); } else toast('كلمة السر غلط ❌'); }
+    catch(e){ toast('تعذّر ا
