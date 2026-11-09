@@ -68,7 +68,7 @@ nav{position:fixed;bottom:0;inset-inline:0;display:flex;gap:6px;padding:8px 12px
     <span class="lbl">اسمك</span><select id="myName"></select>
     <span class="lbl">رمزك السري</span><input id="myPin" type="password" inputmode="numeric" placeholder="الرمز اللي استلمته من الأدمن">
     <button class="btn" id="openBox">دخول 🚪</button>
-    <p class="note">ما عندك رمز؟ اطلبه من الأدمن.</p>
+    <p class="note">ما عندك رمز؟ اطلبه من الأدمن. الأدمن بيراجع الرسايل ويقدر يعرف الراسل الحقيقي حتى لو اخترت مجهول، وده فقط لمحاسبة الإساءة والتنمر.</p>
   </div>
 </div>
 <header>
@@ -98,10 +98,10 @@ nav{position:fixed;bottom:0;inset-inline:0;display:flex;gap:6px;padding:8px 12px
       <div id="fromWrap" style="display:none"><p class="hintv" id="fromName"></p></div>
 
       <span class="lbl">رسالتك</span>
-      <textarea id="txt" maxlength="500" placeholder="اكتب هنا بكل أحترام..."></textarea>
+      <textarea id="txt" maxlength="500" placeholder="اكتب هنا بكل لطف..."></textarea>
       <div class="cnt"><span id="n">0</span> / 500</div>
       <button class="btn" id="sendBtn">إرسال 🚀</button>
-      <p class="note">⚠️ "مجهول" معناها إن اسمك ما بيظهر لباقي الدفعة، في حالات الإساءة والتنمر. الإساءة ممنوعة، والرسايل بتتفحص تلقائياً، والمخالفة بتتحجب وتتراجع من النظام.</p>
+      <p class="note">⚠️ "مجهول" معناها إن اسمك ما بيظهر لباقي الدفعة، لكن الأدمن يقدر يعرف الراسل الحقيقي في حالات الإساءة والتنمر. الإساءة ممنوعة، والرسايل بتتفحص تلقائياً، والمخالفة بتتحجب وتتراجع من الأدمن.</p>
     </div>
   </section>
 
@@ -154,7 +154,7 @@ const girls = ["وعد أمين","مأب","نفيسه","رغده","مروه","ش
 const boys = ["منذر","ايمن","مجتبى سليمان","ماهر خالد","محمد عثمان جاد الله","محمد حسن","احمد البشير","احمد سامي","حسام المكنه","محمد عاطف","اواب","محمد خالد","الجيلى","التجاني","المثنى مزمل","عبدالله","نزار","أمجد","عبدالرحيم","محمد خوجلي","عبدالرحمن رضوان","المقداد صلاح","محمد","ادم تصرف ساي","وائل","مبارك خليل","عبدالله عبد الله","الطيب كمال الطيب","عاصم"];
 
 /* قائمة الكلمات الممنوعة (تتطابق مع الموجودة في قاعدة البيانات) */
-const BAD = ["كلب","كلبة","حمار","حمارة","غبي","غبية","حقير","حقيرة","قذر","قذرة","وسخ","وسخة","زباله","منحط","منحطة","خنزير","عاهر","شرموط","قحبة","ابن الكلب","ابن الحرام","ولد الحرام","يلعن","اخرس","اخرسي","انتحر","انتحري","اقتل نفسك","اقتلك","ديوث","خول","منيوك","فاشل","فاشلة","تافه","بتاع بنات","تافهة"];
+const BAD = ["كلب","كلبة","حمار","حمارة","غبي","غبية","حقير","حقيرة","قذر","قذرة","وسخ","وسخة","زباله","منحط","منحطة","خنزير","عاهر","شرموط","قحبة","ابن الكلب","ابن الحرام","ولد الحرام","يلعن","اخرس","اخرسي","انتحر","انتحري","اقتل نفسك","اقتلك","ديوث","خول","منيوك","فاشل","فاشلة","تافه","تافهة"];
 const norm = s => s.toLowerCase().replace(/[\u064B-\u065F\u0670\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/(.)\1+/g,'$1');
 const BADN = BAD.map(norm);
 function isBad(t){ const a = norm(t), b = a.replace(/[^a-z\u0621-\u064a]/g,''); return BADN.some(w => a.includes(w) || b.includes(w.replace(/ /g,''))); }
@@ -350,4 +350,77 @@ $('lock').addEventListener('click', async () => {
     taps = 0;
     const p = prompt('كلمة سر الأدمن:'); if (!p) return;
     try { if (await rpc('admin_check', {p_pass:p})){ adminPass = p; show('adminV'); } else toast('كلمة السر غلط ❌'); }
-    catch(e){ toast('تعذّر ا
+    catch(e){ toast('تعذّر الاتصال ⚠️'); }
+  }
+});
+$('aOut').addEventListener('click', () => { adminPass = null; show('writeV'); });
+$('aq').addEventListener('input', loadAdmin);
+$('aChips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  aMode = b.dataset.m;
+  document.querySelectorAll('#aChips .chip').forEach(x => x.classList.toggle('on', x === b));
+  loadAdmin();
+});
+async function loadAdmin(){
+  if (!adminPass) return;
+  try {
+    let rows = (await rpc('admin_list', {p_pass:adminPass, p_mode:aMode})) || [];
+    const aq = $('aq').value.toLowerCase().trim();
+    if (aq) rows = rows.filter(p => ((p.sender_name||'') + ' ' + (p.to_name||'') + ' ' + (p.from_name||'')).toLowerCase().includes(aq));
+    const box = $('aList'); box.textContent = '';
+    if (!rows.length){ box.appendChild(mk('div','empty', aMode === 'review' ? 'ما في رسايل للمراجعة 🎉' : 'ما في رسايل هنا.')); return; }
+    rows.forEach(p => {
+      const c = card(p, p.hidden ? ' hid' : '');
+      const tags = mk('div'); tags.style.marginTop = '8px';
+      if (p.visibility === 'private') tags.appendChild(mk('span','flag g','🔒 خاصة'));
+      if (p.sender_name) tags.appendChild(mk('span','flag g','✍️ الراسل الحقيقي: ' + p.sender_name + (p.from_name ? '' : ' (اختار مجهول)')));
+      if (p.flagged) tags.appendChild(mk('span','flag','⚠️ كلمات مشبوهة'));
+      if (p.reports > 0) tags.appendChild(mk('span','flag','🚩 ' + p.reports + ' بلاغ'));
+      if (p.hidden) tags.appendChild(mk('span','flag','مخفية'));
+      c.appendChild(tags);
+      const f = mk('div','pf'); f.appendChild(mk('span','',ago(p.created_at)));
+      const act = mk('span');
+      const mkBtn = (cls, txt, action, ask) => {
+        const b = mk('button', cls, txt);
+        b.addEventListener('click', async () => {
+          if (ask && !confirm(ask)) return;
+          try { await rpc('admin_action', {p_pass:adminPass, p_id:p.id, p_action:action}); loadAdmin(); } catch(e){ toast('فشل ⚠️'); }
+        });
+        return b;
+      };
+      if (p.hidden || p.flagged || p.reports > 0) act.appendChild(mkBtn('ok','✅ سماح','approve'));
+      if (!p.hidden) act.appendChild(mkBtn('','🙈 إخفاء','hide'));
+      act.appendChild(mkBtn('no','🗑️ حذف','delete','حذف نهائي؟'));
+      f.appendChild(act); c.appendChild(f); box.appendChild(c);
+    });
+  } catch(e){ toast('تعذّر تحميل اللوحة ⚠️'); }
+}
+
+/* ---------- التنقل ---------- */
+const VIEWS = ['writeV','wallV','boxV','adminV'];
+function show(id){
+  VIEWS.forEach(v => $(v).style.display = v === id ? 'block' : 'none');
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.v === id));
+  window.scrollTo({top:0});
+  if (id === 'wallV') pullWall();
+  if (id === 'boxV') loadBox();
+  if (id === 'adminV') loadAdmin();
+}
+document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => show(b.dataset.v)));
+
+setInterval(() => {
+  if (document.hidden) return;
+  if ($('wallV').style.display !== 'none') pullWall();
+  if ($('boxV').style.display !== 'none' && me) loadBox();
+  if ($('adminV').style.display !== 'none') loadAdmin();
+}, 12000);
+
+(async function(){
+  if (!me) return;
+  try { if (await rpc('check_pin', {p_name:me.name, p_pin:me.pin})) enter(); else logout(); }
+  catch(e){ enter(); }
+})();
+})();
+</script>
+</body>
+</html>
